@@ -1,28 +1,56 @@
 import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 const NavItemsInfo = [
-  { name: "Home" },
-  { name: "Articles" },
-  { name: "Pages" },
-  { name: "Pricing" },
-  { name: "Faq" },
+  { name: "Home", type: "link" },
+  { name: "Articles", type: "link" },
+  { name: "Pages", type: "dropdown", items: ["About us", "Contact us"] },
+  { name: "Pricing", type: "link" },
+  { name: "Faq", type: "link" },
 ];
 
 interface HeaderProps {
-  name: string;
+  // Add the "item" property to the type definition
+  item: {
+    name: string;
+    type: string;
+    items?: string[];
+  };
 }
 
-const NavItem = ({ name }: HeaderProps) => {
+const NavItem = ({ item }: HeaderProps) => {
   return (
     <li className="relative group">
-      <a href="/" className="px-4 py-2">
-        {name}
-      </a>
-      <span className="text-purple-600 absolute transition-all duration-500 font-bold right-0 top-0 group-hover:right-[90%] opacity-0 group-hover:opacity-100">
-        /
-      </span>
+      {item.type === "link" ? (
+        <>
+          <a href="/" className="px-4 py-2">
+            {item.name}
+          </a>
+          <span className="text-purple-600 absolute transition-all duration-500 font-bold right-0 top-0 group-hover:right-[90%] opacity-0 group-hover:opacity-100">
+            /
+          </span>
+        </>
+      ) : (
+        <>
+          <a href="/" className="px-4 py-2 flex gap-x-1 items-center">
+            <span>{item.name}</span>
+            <KeyboardArrowDownIcon />
+          </a>
+          <div className="hidden transition-all duration-500 pt-4 absolute bottom-0 right-0 transform translate-y-full group-hover:block w-max">
+            <ul className="flex flex-col shadow-lg rounded-lg overflow-hidden">
+              {item.items?.map((page) => (
+                <a
+                  href="/"
+                  className="hover:bg-dark-hard hover:text-white px-4 py-2 text-white lg:text-dark-soft"
+                >
+                  {page}
+                </a>
+              ))}
+            </ul>  
+          </div>
+        </>
+      )}
     </li>
   );
 };
@@ -58,7 +86,7 @@ const Header = () => {
           <ul className="text-white items-center gap-y-5 lg:text-dark-soft flex flex-col lg:flex-row gap-x-2 font-semibold font-Ubuntu">
             {/* Use map function to render all the nav items */}
             {NavItemsInfo.map((item) => (
-              <NavItem key={item.name} name={item.name} />
+              <NavItem key={item.name} item={item} />
             ))}
           </ul>
           <button className="mt-5 lg:mt-0 font-Ubuntu border-2 border-purple-600 px-6 py-2 rounded-full text-purple-600 font-semibold hover:bg-purple-600 hover:text-white transition-all duration-300 text-center">
