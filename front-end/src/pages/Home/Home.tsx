@@ -1,13 +1,15 @@
-import React from 'react'
-import MainLayout from '../../components/MainLayout/MainLayout'
-import Hero from './container/Hero/Hero'
+import React from "react";
+import MainLayout from "../../components/MainLayout/MainLayout";
+import Hero from "./container/Hero/Hero";
+import Articles from "../../components/Articles/Articles";
 
 const Home = () => {
   return (
-     <MainLayout>
+    <MainLayout>
       <Hero />
-     </MainLayout>
-  )
-}
+      <Articles />
+    </MainLayout>
+  );
+};
 
-export default Home
+export default Home;
