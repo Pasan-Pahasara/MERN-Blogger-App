@@ -3,9 +3,9 @@ import { images } from "../../../../constants/Images";
 
 const Hero = () => {
   return (
-    <section>
-      <div>
-        <h1>Read the most interesting articles</h1>
+    <section className="container mx-auto flex flex-col px-5 py-5 lg:flex-row">
+      <div className="mt-10 lg:w-1/2">
+        <h1 className="font-ubuntu text-3xl text-center font-bold text-dark-soft md:text-5xl lg:text-4xl xl:text-5xl lg:text-left lg:max-w-[540px]">Read the most interesting articles</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga mollitia
           dolorem beatae ipsa, laboriosam assumenda perspiciatis aut culpa ex,
@@ -27,8 +27,10 @@ const Hero = () => {
           </ul>
         </div>
       </div>
+      
+      <div className="hidden">
       <img src={images.HeroImage} alt="users are reading articles" />
-      <div></div>
+      </div>
     </section>
   );
 };
