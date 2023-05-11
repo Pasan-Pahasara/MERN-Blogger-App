@@ -76,6 +76,30 @@ const Footer = () => {
             Lorem ipsum, dolor sit amet consectetur adipisicing elit.
           </p>
           {/* end logo  */}
+          {/* start social media icons */}
+          <ul className="flex justify-center items-center mt-5 space-x-4 text-gray-300 md:justify-start">
+            <li>
+              <a href="/">
+                <TwitterIcon className="w-6 h-auto" />
+              </a>
+            </li>
+            <li>
+              <a href="/">
+                <GitHubIcon className="w-6 h-auto" />
+              </a>
+            </li>
+            <li>
+              <a href="/">
+                <InstagramIcon className="w-6 h-auto" />
+              </a>
+            </li>
+            <li>
+              <a href="/">
+                <FacebookIcon className="w-6 h-auto" />
+              </a>
+            </li>
+          </ul>
+          {/* end social media icons */}
         </div>
       </footer>
       {/* end footer section  */}
