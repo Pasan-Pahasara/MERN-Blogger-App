@@ -101,6 +101,11 @@ const Footer = () => {
           </ul>
           {/* end social media icons */}
         </div>
+        <div className="hidden md:flex flex-col items-center space-y-4 md:col-span-12 lg:col-span-10">
+          <p className=" text-dark-light">
+            © Copyright 2023 Pasan Pahasara. All Rights Reserved.
+          </p>
+        </div>
       </footer>
       {/* end footer section  */}
     </section>
