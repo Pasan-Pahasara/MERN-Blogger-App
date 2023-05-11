@@ -1,9 +1,16 @@
 import React from "react";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TelegramIcon from "@mui/icons-material/Telegram";
 
 const Footer = () => {
   return (
     <section className="bg-dark-hard">
+      {/* start footer section  */}
       <footer className="container mx-auto grid grid-cols-10 px-5 py-10 gap-y-10 gap-x-5 md:pt-20 md:grid-cols-12 lg:grid-cols-10 lg:gap-x-10">
+        {/* start navigations */}
         <div className="col-span-5 md:col-span-4 lg:col-span-2">
           <h3 className="text-dark-light font-bold md:text-lg">Product</h3>
           <ul className="text-[#959EAD] text-sm mt-5 space-y-4 md:text-base">
@@ -57,7 +64,21 @@ const Footer = () => {
             </li>
           </ul>
         </div>
+        {/* end navigations */}
+        <div className="col-span-10 md:order-first md:col-span-4 lg:col-span-2">
+          {/* start logo  */}
+          <img
+            src=""
+            alt="logo"
+            className="brightness-0 invert mx-auto md:mx-0"
+          />
+          <p className="text-sm text-dark-light text-center mt-4 md:text-left md:text-base lg:text-sm">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          </p>
+          {/* end logo  */}
+        </div>
       </footer>
+      {/* end footer section  */}
     </section>
   );
 };
