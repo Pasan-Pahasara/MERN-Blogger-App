@@ -46,6 +46,17 @@ const Footer = () => {
             </li>
           </ul>
         </div>
+        <div className="col-span-5 md:col-span-4 lg:col-span-2">
+          <h3 className="text-dark-light font-bold md:text-lg">More</h3>
+          <ul className="text-[#959EAD] text-sm mt-5 space-y-4 md:text-base">
+            <li>
+              <a href="/">License</a>
+            </li>
+            <li>
+              <a href="/">Changelog</a>
+            </li>
+          </ul>
+        </div>
       </footer>
     </section>
   );
