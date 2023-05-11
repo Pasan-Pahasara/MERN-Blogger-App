@@ -45,13 +45,13 @@ const CTA = () => {
           </div>
           <div className="col-span-12 hidden mb-[70px] md:block md:order-first lg:col-span-6 lg:order-last">
             <div className="w-3/4 mx-auto relative">
-              <div className="w-1/2 h-1/2 bg-[#FC5A5A] rounded-lg absolute top-[10%] -right-[8%]" />
+              <div className="w-1/2 h-1/2 bg-[#ad52ad] rounded-lg absolute top-[10%] -right-[8%]" />
               <div className="w-1/2 h-1/2 bg-white rounded-lg opacity-[.06] absolute -bottom-[10%] -left-[8%]" />
               <div className="w-full rounded-xl bg-white p-3 z-[1] relative">
                 <img
                   src={images.CTAImage}
                   alt="title"
-                  className="w-full object-cover object-center h-auto md:h-52 lg:h-48 xl:h-60"
+                  className="w-full object-cover object-center h-auto md:h-52 lg:h-48 xl:h-60 rounded-lg"
                 />
                 <div className="p-5">
                   <h2 className="font-Ubuntu font-bold text-xl text-dark-soft md:text-2xl lg:text[28px]">
