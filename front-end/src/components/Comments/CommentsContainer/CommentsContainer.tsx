@@ -7,7 +7,7 @@ interface CommentsContainerProps {
 
 const CommentsContainer = ({ className }: CommentsContainerProps) => {
   return <div className={`${className}`}>
-    <CommentForm />
+    <CommentForm btnLabel="Send"/>
   </div>;
 };
 
