@@ -2,9 +2,10 @@ import React, { useState } from "react";
 
 interface CommentsFormProps {
   btnLabel?: string;
+  formSubmitHandler: (comment: string) => void;
 }
 
-const CommentForm = ({ btnLabel }: CommentsFormProps) => {
+const CommentForm = ({ btnLabel, formSubmitHandler }: CommentsFormProps) => {
   // start value state
   const [value, setvalue] = useState("");
   // end value state
@@ -12,6 +13,8 @@ const CommentForm = ({ btnLabel }: CommentsFormProps) => {
   // start submitHandler
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    formSubmitHandler(value);
+    setvalue("");
   };
   // end submitHandler
 

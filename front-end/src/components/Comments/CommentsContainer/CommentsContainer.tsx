@@ -7,7 +7,9 @@ interface CommentsContainerProps {
 
 const CommentsContainer = ({ className }: CommentsContainerProps) => {
   return <div className={`${className}`}>
-    <CommentForm btnLabel="Send"/>
+    <CommentForm btnLabel="Send" formSubmitHandler={function (comment: string): void {
+      throw new Error("Function not implemented.");
+    } } />
   </div>;
 };
 
