@@ -1,20 +1,27 @@
-import React from 'react'
-import MainLayout from '../../components/MainLayout/MainLayout'
+import React from "react";
+import MainLayout from "../../components/MainLayout/MainLayout";
+import BreadCrumbs from "../../components/BreadCrumbs/BreadCrumbs";
+
+const breadCrumbsData = [
+  { name: "Home", link: "/" },
+  { name: "Blog", link: "/blog" },
+  { name: "Article title", link: `/blog/1` },
+];
 
 const ArticleDetails = () => {
   return (
     <div>
-        <MainLayout>
-            {/* start articleDetails section */}
-            <section className='container mx-auto max-w-5xl flex flex-col px-5 py-5'>
-                <article className='flex-1 '>
-
-                </article>
-            </section>
-            {/* ens articleDetails section */}
-        </MainLayout>
+      <MainLayout>
+        {/* start articleDetails section */}
+        <section className="container mx-auto max-w-5xl flex flex-col px-5 py-5">
+          <article className="flex-1 ">
+            <BreadCrumbs data={breadCrumbsData} />
+          </article>
+        </section>
+        {/* ens articleDetails section */}
+      </MainLayout>
     </div>
-  )
-}
+  );
+};
 
-export default ArticleDetails
+export default ArticleDetails;

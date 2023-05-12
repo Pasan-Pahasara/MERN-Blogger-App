@@ -9,7 +9,7 @@ function App() {
     <div className="App font-Ubuntu">
       {/* start routes  */}
       <Routes>
-        <Route path="/" element={<Home />}></Route>
+        <Route index path="/" element={<Home />}></Route>
         <Route path="/blog/:id" element={<ArticleDetails />}></Route>
       </Routes>
       {/* end routes  */}
