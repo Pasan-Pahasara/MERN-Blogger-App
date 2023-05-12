@@ -9,4 +9,3 @@ const CommentsContainer = ({ className }: CommentsContainerProps) => {
 };
 
 export default CommentsContainer;
-             
