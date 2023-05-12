@@ -1,6 +1,8 @@
 import React from "react";
 import MainLayout from "../../components/MainLayout/MainLayout";
 import BreadCrumbs from "../../components/BreadCrumbs/BreadCrumbs";
+import images from "../../constants/Images/images";
+import { Link } from "react-router-dom";
 
 const breadCrumbsData = [
   { name: "Home", link: "/" },
@@ -16,6 +18,13 @@ const ArticleDetails = () => {
         <section className="container mx-auto max-w-5xl flex flex-col px-5 py-5">
           <article className="flex-1 ">
             <BreadCrumbs data={breadCrumbsData} />
+            {/* image start  */}
+            <img
+              className="rounded-xl w-full"
+              src={images.Post1Image}
+              alt="ui ux"
+            />
+            {/* image end  */}
           </article>
         </section>
         {/* ens articleDetails section */}
