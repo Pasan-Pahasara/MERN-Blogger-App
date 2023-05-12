@@ -1,17 +1,19 @@
 import React from "react";
 import images from "../../../../constants/Images/images";
+import { Link } from "react-router-dom";
 
 interface Post {
-    _id: string;
-    image: string;
-    title: string;
-    createdAt: string;
-  }
+  _id: string;
+  image: string;
+  title: string;
+  createdAt: string;
+}
 
 interface CardProps {
   className?: string;
   header: string;
   posts: Post[];
+  tags: string[];
 }
 
 const SuggestPosts = ({ className, header, posts = [], tags }: CardProps) => {
@@ -50,10 +52,17 @@ const SuggestPosts = ({ className, header, posts = [], tags }: CardProps) => {
           </div>
         ))}
       </div>
-      <h2 className="flex flex-wrap gap-x-2 gap-y-2 mt-4">Tags</h2>
-      <div>
-        {tags.map((item  ) =>{
-
+      <h2 className="font-Ubuntu font-medium text-dar-hard mt-8">Tags</h2>
+      <div className="flex flex-wrap gap-x-2 gap-y-2 mt-4">
+        {tags.map((item) => {
+          return (
+            <Link
+              to="/"
+              className="inline-block rounded-md px-3 py-1.5 bg-purple-600 font-Ubuntu text-xs text-white"
+            >
+              {item}
+            </Link>
+          );
         })}
       </div>
     </div>

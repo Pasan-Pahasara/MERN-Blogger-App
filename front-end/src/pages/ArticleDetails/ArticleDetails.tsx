@@ -87,7 +87,11 @@ const ArticleDetails = () => {
             {/* end discription */}
           </article>
           {/* start suggested posts */}
-          <SuggestPosts header={"Latest Articles"} posts={postsData} />
+          <SuggestPosts
+            header={"Latest Articles"}
+            posts={postsData}
+            tags={tagsData}
+          />
           {/* end suggested posts */}
         </section>
         {/* end articleDetails section */}
