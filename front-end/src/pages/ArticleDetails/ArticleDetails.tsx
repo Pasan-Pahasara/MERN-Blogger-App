@@ -5,9 +5,11 @@ const ArticleDetails = () => {
   return (
     <div>
         <MainLayout>
-            <section>
-                <h1>Article Detail Page</h1>
+            {/* start articleDetails section */}
+            <section className='container mx-auto max-w-5xl flex flex-col px-5 py-5'>
+
             </section>
+            {/* ens articleDetails section */}
         </MainLayout>
     </div>
   )
