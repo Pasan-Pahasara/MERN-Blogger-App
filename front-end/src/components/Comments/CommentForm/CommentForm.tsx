@@ -18,7 +18,7 @@ const CommentForm = ({ btnLabel }: CommentsFormProps) => {
   return (
     // start form
     <form onSubmit={submitHandler}>
-      <div>
+      <div className="flex flex-col items-end border border-purple-600 rounded-lg p-4">
         {/* start textarea  */}
         <textarea
           className="w-full focus:outline-none"
