@@ -25,6 +25,25 @@ const ArticleDetails = () => {
               alt="ui ux"
             />
             {/* image end  */}
+            {/* start discription */}
+            <Link
+              to={"/blog?category=selectedCategory"}
+              className="text-purplu-600 text-sm font-Ubuntu inline-block mt-4"
+            >
+              EDUCATION
+            </Link>
+            <h1 className="text-xl font-medium font-Ubuntu mt-4 text-dark-hard">
+              Help ui ux engineer get better education
+            </h1>
+            <div className="mt-4 text-dark-soft">
+              <p className="leading-7">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Reprehenderit doloremque totam voluptas possimus recusandae?
+                Quia, similique! Fuga, laboriosam! Iure odit hic in dolore animi
+                repellat praesentium quod vero cupiditate adipisci?
+              </p>
+            </div>
+            {/* end discription */}
           </article>
         </section>
         {/* ens articleDetails section */}
