@@ -69,11 +69,11 @@ const ArticleDetails = () => {
             {/* start discription */}
             <Link
               to={"/blog?category=selectedCategory"}
-              className="text-purplu-600 text-sm font-Ubuntu inline-block mt-4"
+              className="text-purplu-600 text-sm font-Ubuntu inline-block mt-4 md:base"
             >
               EDUCATION
             </Link>
-            <h1 className="text-xl font-medium font-Ubuntu mt-4 text-dark-hard">
+            <h1 className="text-xl font-medium font-Ubuntu mt-4 text-dark-hard md:text[26px]">
               Help ui ux engineer get better education
             </h1>
             <div className="mt-4 text-dark-soft">
@@ -91,6 +91,7 @@ const ArticleDetails = () => {
             header={"Latest Articles"}
             posts={postsData}
             tags={tagsData}
+            className="mt-8"
           />
           {/* end suggested posts */}
         </section>
