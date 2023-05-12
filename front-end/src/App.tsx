@@ -9,6 +9,7 @@ function App() {
       {/* start routes  */}
       <Routes>
         <Route path="/" element={<Home />}></Route>
+        {/* <Route path="/blog/:id" element={}></Route> */}
       </Routes>
       {/* end routes  */}
     </div>
