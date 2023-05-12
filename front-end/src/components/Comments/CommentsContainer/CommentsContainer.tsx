@@ -33,9 +33,7 @@ const CommentsContainer = ({ className }: CommentsContainerProps) => {
       {/* start added comment form  */}
       <CommentForm
         btnLabel="Send"
-        formSubmitHandler={function (comment: string): void {
-          throw new Error("Function not implemented.");
-        }}
+        formSubmitHandler={(text) => addCommentHandler}
       />
       {/* end added comment form  */}
     </div>
