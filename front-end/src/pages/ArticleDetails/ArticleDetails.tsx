@@ -56,8 +56,8 @@ const ArticleDetails = () => {
     <div>
       <MainLayout>
         {/* start articleDetails section */}
-        <section className="container mx-auto max-w-5xl flex flex-col px-5 py-5">
-          <article className="flex-1 ">
+        <section className="container mx-auto max-w-5xl flex flex-col px-5 py-5 lg:flex-row lg:gap-x-5 lg:items-start">
+          <article className="flex-2">
             <BreadCrumbs data={breadCrumbsData} />
             {/* image start  */}
             <img
@@ -69,11 +69,11 @@ const ArticleDetails = () => {
             {/* start discription */}
             <Link
               to={"/blog?category=selectedCategory"}
-              className="text-purplu-600 text-sm font-Ubuntu inline-block mt-4 md:base"
+              className="text-purple-600 text-sm font-Ubuntu inline-block mt-4 md:text-base"
             >
               EDUCATION
             </Link>
-            <h1 className="text-xl font-medium font-Ubuntu mt-4 text-dark-hard md:text[26px]">
+            <h1 className="text-xl font-medium font-Ubuntu mt-4 text-dark-hard md:text-[26px]">
               Help ui ux engineer get better education
             </h1>
             <div className="mt-4 text-dark-soft">
@@ -91,7 +91,7 @@ const ArticleDetails = () => {
             header={"Latest Articles"}
             posts={postsData}
             tags={tagsData}
-            className="mt-8"
+            className="mt-8 lg:mt-0 lg-max-w-xs"
           />
           {/* end suggested posts */}
         </section>

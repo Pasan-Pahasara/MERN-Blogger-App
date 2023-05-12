@@ -18,11 +18,11 @@ interface CardProps {
 
 const SuggestPosts = ({ className, header, posts = [], tags }: CardProps) => {
   return (
-    <div className={`w-full shadow-purple-500/20 rounded-lg p-4 ${className}`}>
+    <div className={`w-full shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px] rounded-lg p-4 ${className}`}>
       <h2 className="font-Ubuntu font-medium text-dark-hard md:text-xl">
         {header}
       </h2>
-      <div className="grid gap-y mt-5 md:grid-cols-2 md:gap-x-5">
+      <div className="grid gap-y-5 mt-5 md:grid-cols-2 md:gap-x-5 lg:grid-cols-1">
         {posts.map((item) => (
           // start id
           <div
@@ -39,7 +39,7 @@ const SuggestPosts = ({ className, header, posts = [], tags }: CardProps) => {
             {/* end image  */}
             {/* start title */}
             <div className="text-sm font-Ubuntu text-dark-hard font-medium">
-              <h3 className="text-sm font-Ubuntu text-dark-hard font-medium md:text-base">
+              <h3 className="text-sm font-Ubuntu text-dark-hard font-medium md:text-base lg:text-lg">
                 {item.title}
               </h3>
               {/* start date  */}
@@ -56,7 +56,9 @@ const SuggestPosts = ({ className, header, posts = [], tags }: CardProps) => {
           </div>
         ))}
       </div>
-      <h2 className="font-Ubuntu font-medium text-dar-hard mt-8 md:text-xl">Tags</h2>
+      <h2 className="font-Ubuntu font-medium text-dark-hard mt-8 md:text-xl">
+        Tags
+      </h2>
       <div className="flex flex-wrap gap-x-2 gap-y-2 mt-4">
         {tags.map((item) => {
           return (
