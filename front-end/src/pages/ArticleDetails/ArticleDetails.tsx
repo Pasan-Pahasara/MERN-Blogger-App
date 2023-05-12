@@ -40,6 +40,17 @@ const postsData = [
 ];
 // end added tempory data to the posts
 
+// start tempory tag data
+const tagsData = [
+  "UI UX",
+  "Theams",
+  "React",
+  "React Native",
+  "Tailwind CSS",
+  "Education",
+];
+// end tempory tag data
+
 const ArticleDetails = () => {
   return (
     <div>
