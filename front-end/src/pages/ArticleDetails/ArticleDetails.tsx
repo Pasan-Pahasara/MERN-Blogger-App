@@ -7,7 +7,9 @@ const ArticleDetails = () => {
         <MainLayout>
             {/* start articleDetails section */}
             <section className='container mx-auto max-w-5xl flex flex-col px-5 py-5'>
+                <article className='flex-1 '>
 
+                </article>
             </section>
             {/* ens articleDetails section */}
         </MainLayout>
