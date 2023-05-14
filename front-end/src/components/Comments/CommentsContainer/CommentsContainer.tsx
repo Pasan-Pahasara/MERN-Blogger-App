@@ -1,12 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CommentForm from "../CommentForm/CommentForm";
+import { getCommentsData } from "../../../data/Comments/Comments";
 
+// start introducing props
 interface CommentsContainerProps {
   className?: string;
   value: string;
 }
+// end introducing props
+
+interface Comment {
+  _id: string;
+  user: {
+    _id: string;
+    name: string;
+  };
+  desc: string;
+  post: string;
+  parent: string | null;
+  replyOnUser: string | null;
+  createdAt: string;
+}
+
 
 const CommentsContainer = ({ className }: CommentsContainerProps) => {
+  // start state
+  const [comments, setComments] = useState<Comment[]>([]);
+  // end state
+
+  useEffect(() => {
+    (async () => {
+      const commentData = await getCommentsData();
+      setComments(commentData);
+    })();
+  }, []);
+
   // start add comment
   const addCommentHandler = (
     { value }: CommentsContainerProps,
@@ -33,7 +61,7 @@ const CommentsContainer = ({ className }: CommentsContainerProps) => {
       {/* start added comment form  */}
       <CommentForm
         btnLabel="Send"
-        formSubmitHandler={(text) => addCommentHandler}
+        formSubmitHandler={(value) => addCommentHandler({ value })}
       />
       {/* end added comment form  */}
     </div>
