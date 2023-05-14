@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CommentForm from "../CommentForm/CommentForm";
 import { getCommentsData } from "../../../data/Comments/Comments";
+import Comments from "../Comments";
 
 // start introducing props
 interface CommentsContainerProps {
@@ -29,6 +30,10 @@ const CommentsContainer = ({ className }: CommentsContainerProps) => {
   const [comments, setComments] = useState<Comment[]>([]);
   // end state
 
+  // start main comments
+  const mainComments = comments.filter((comment) => comment.parent === null);
+  // end main comments
+
   console.log(comments);
 
   useEffect(() => {
@@ -56,11 +61,11 @@ const CommentsContainer = ({ className }: CommentsContainerProps) => {
       replyOnUser: replyOnUser,
       createdAt: "2022-12-31T17:22:05.092+0000",
     };
-    // start set comments 
+    // start set comments
     setComments((curState) => {
-      return [newComment, ...curState]
+      return [newComment, ...curState];
     });
-    // end set comments 
+    // end set comments
   };
   // end add comment
 
@@ -72,6 +77,11 @@ const CommentsContainer = ({ className }: CommentsContainerProps) => {
         formSubmitHandler={(value) => addCommentHandler({ value })}
       />
       {/* end added comment form  */}
+      <div className="space-y-4 mt-8">
+        {mainComments.map((comment) => (
+          <Comments />
+      ))}
+      </div>
     </div>
   );
 };

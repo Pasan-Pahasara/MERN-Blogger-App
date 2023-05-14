@@ -87,7 +87,7 @@ const ArticleDetails = () => {
             </div>
             {/* end discription */}
             {/* start comments container  */}
-            <CommentsContainer className="mt-10" value={""} />
+            <CommentsContainer className="mt-10" value=""/>
             {/* end comments container  */}
           </article>
           {/* start suggested posts */}
