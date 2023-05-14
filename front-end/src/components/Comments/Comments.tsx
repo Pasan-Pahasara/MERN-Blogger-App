@@ -1,7 +1,8 @@
 import React from "react";
 import images from "../../constants/Images/images";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
-import EditIcon from '@mui/icons-material/Edit';
+import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 interface CommentsProps {
   comment: any;
@@ -48,10 +49,16 @@ const Comments = ({ comment }: CommentsProps) => {
           {/* end reply button  */}
            {/* start edit button  */}
            <button className="flex items-center space-x-2">
-            <EditIcon className="w-4 h-auto" />
+            <ModeEditOutlineOutlinedIcon className="w-4 h-auto" />
             <span>Edit</span>
           </button>
           {/* end edit button  */}
+           {/* start delete button  */}
+           <button className="flex items-center space-x-2">
+            <DeleteOutlineIcon className="w-4 h-auto" />
+            <span>Delete</span>
+          </button>
+          {/* end delete button  */}
         </div>
       </div>
     </div>
