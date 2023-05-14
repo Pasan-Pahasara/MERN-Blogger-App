@@ -79,8 +79,8 @@ const CommentsContainer = ({ className }: CommentsContainerProps) => {
       {/* end added comment form  */}
       <div className="space-y-4 mt-8">
         {mainComments.map((comment) => (
-          <Comments />
-      ))}
+          <Comments comment={comment} />
+        ))}
       </div>
     </div>
   );
