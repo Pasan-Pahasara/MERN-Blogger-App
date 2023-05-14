@@ -11,6 +11,7 @@ interface CommentsProps {
 
 const Comments = ({ comment, logginedUserId }: CommentsProps) => {
   const isUserLoggined = Boolean(logginedUserId);
+  const commentBelongsToUser = logginedUserId === comment.user._id;
 
   return (
     // start comment wrapper
@@ -53,18 +54,22 @@ const Comments = ({ comment, logginedUserId }: CommentsProps) => {
             //  end reply button
           )}
 
-          {/* start edit button  */}
-          <button className="flex items-center space-x-2">
-            <ModeEditOutlineOutlinedIcon className="w-4 h-auto" />
-            <span>Edit</span>
-          </button>
-          {/* end edit button  */}
-          {/* start delete button  */}
-          <button className="flex items-center space-x-2">
-            <DeleteOutlineIcon className="w-4 h-auto" />
-            <span>Delete</span>
-          </button>
-          {/* end delete button  */}
+          {commentBelongsToUser && (
+            <>
+              {/* start edit button  */}
+              <button className="flex items-center space-x-2">
+                <ModeEditOutlineOutlinedIcon className="w-4 h-auto" />
+                <span>Edit</span>
+              </button>
+              {/* end edit button  */}
+              {/* start delete button  */}
+              <button className="flex items-center space-x-2">
+                <DeleteOutlineIcon className="w-4 h-auto" />
+                <span>Delete</span>
+              </button>
+              {/* end delete button  */}
+            </>
+          )}
         </div>
       </div>
     </div>
