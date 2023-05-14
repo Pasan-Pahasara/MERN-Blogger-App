@@ -7,6 +7,7 @@ import Comments from "../Comments";
 interface CommentsContainerProps {
   className?: string;
   value: string;
+  logginedUserId: any;
 }
 // end introducing props
 
@@ -25,7 +26,7 @@ interface Comment {
 }
 // end comment props
 
-const CommentsContainer = ({ className }: CommentsContainerProps) => {
+const CommentsContainer = ({ className, logginedUserId }: CommentsContainerProps) => {
   // start state
   const [comments, setComments] = useState<Comment[]>([]);
   // end state
@@ -74,12 +75,12 @@ const CommentsContainer = ({ className }: CommentsContainerProps) => {
       {/* start added comment form  */}
       <CommentForm
         btnLabel="Send"
-        formSubmitHandler={(value) => addCommentHandler({ value })}
+        formSubmitHandler={(value) => addCommentHandler({ value, logginedUserId })}
       />
       {/* end added comment form  */}
       <div className="space-y-4 mt-8">
         {mainComments.map((comment) => (
-          <Comments comment={comment} />
+          <Comments comment={comment} logginedUserId={logginedUserId} />
         ))}
       </div>
     </div>

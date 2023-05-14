@@ -6,9 +6,12 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 interface CommentsProps {
   comment: any;
+  logginedUserId: string;
 }
 
-const Comments = ({ comment }: CommentsProps) => {
+const Comments = ({ comment, logginedUserId }: CommentsProps) => {
+const isUserLoggined = Boolean(logginedUserId)
+
   return (
     // start comment wrapper
     <div className="flex flex-nowrap items-start gap-x-3 bg-[#F2F4F5] p-3 rounded-lg">
