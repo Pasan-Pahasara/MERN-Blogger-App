@@ -1,8 +1,8 @@
 import React from "react";
 import images from "../../constants/Images/images";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
-import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 interface CommentsProps {
   comment: any;
@@ -10,7 +10,7 @@ interface CommentsProps {
 }
 
 const Comments = ({ comment, logginedUserId }: CommentsProps) => {
-const isUserLoggined = Boolean(logginedUserId)
+  const isUserLoggined = Boolean(logginedUserId);
 
   return (
     // start comment wrapper
@@ -44,20 +44,23 @@ const isUserLoggined = Boolean(logginedUserId)
         </p>
         {/* end user description */}
         <div className="flex items-center gap-x-3 text-dark-light font-Ubuntu text-sm mt-3 mb-3">
-          {/* start reply button  */}
+          {isUserLoggined && (
+            // start reply button
+            <button className="flex items-center space-x-2">
+              <ChatBubbleOutlineIcon className="w-4 h-auto" />
+              <span>Reply</span>
+            </button>
+            //  end reply button
+          )}
+
+          {/* start edit button  */}
           <button className="flex items-center space-x-2">
-            <ChatBubbleOutlineIcon className="w-4 h-auto" />
-            <span>Reply</span>
-          </button>
-          {/* end reply button  */}
-           {/* start edit button  */}
-           <button className="flex items-center space-x-2">
             <ModeEditOutlineOutlinedIcon className="w-4 h-auto" />
             <span>Edit</span>
           </button>
           {/* end edit button  */}
-           {/* start delete button  */}
-           <button className="flex items-center space-x-2">
+          {/* start delete button  */}
+          <button className="flex items-center space-x-2">
             <DeleteOutlineIcon className="w-4 h-auto" />
             <span>Delete</span>
           </button>
