@@ -7,11 +7,24 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 interface CommentsProps {
   comment: any;
   logginedUserId: string;
+  affectedComment: any;
+  setAffectedComment: any;
 }
 
-const Comments = ({ comment, logginedUserId }: CommentsProps) => {
+const Comments = ({
+  comment,
+  logginedUserId,
+  affectedComment,
+  setAffectedComment,
+}: CommentsProps) => {
   const isUserLoggined = Boolean(logginedUserId);
   const commentBelongsToUser = logginedUserId === comment.user._id;
+  // start replying condition 
+  const isReplying =
+    affectedComment &&
+    affectedComment.type === "replying" &&
+    affectedComment._id === comment._id;
+  // end replying condition 
 
   return (
     // start comment wrapper
@@ -47,7 +60,12 @@ const Comments = ({ comment, logginedUserId }: CommentsProps) => {
         <div className="flex items-center gap-x-3 text-dark-light font-Ubuntu text-sm mt-3 mb-3">
           {isUserLoggined && (
             // start reply button
-            <button className="flex items-center space-x-2">
+            <button
+              className="flex items-center space-x-2"
+              onClick={() =>
+                setAffectedComment({ type: "replying", _id: comment._id })
+              }
+            >
               <ChatBubbleOutlineIcon className="w-4 h-auto" />
               <span>Reply</span>
             </button>

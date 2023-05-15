@@ -7,7 +7,7 @@ import Comments from "../Comments";
 interface CommentsContainerProps {
   className?: string;
   value: string;
-  logginedUserId: any;
+  logginedUserId: string;
 }
 // end introducing props
 
@@ -26,7 +26,10 @@ interface Comment {
 }
 // end comment props
 
-const CommentsContainer = ({ className, logginedUserId }: CommentsContainerProps) => {
+const CommentsContainer = ({
+  className,
+  logginedUserId,
+}: CommentsContainerProps) => {
   // start state
   const [comments, setComments] = useState<Comment[]>([]);
   // end state
@@ -34,6 +37,8 @@ const CommentsContainer = ({ className, logginedUserId }: CommentsContainerProps
   // start main comments
   const mainComments = comments.filter((comment) => comment.parent === null);
   // end main comments
+
+  const [affectedComment, setAffectedComment] = useState(null);
 
   console.log(comments);
 
@@ -75,12 +80,19 @@ const CommentsContainer = ({ className, logginedUserId }: CommentsContainerProps
       {/* start added comment form  */}
       <CommentForm
         btnLabel="Send"
-        formSubmitHandler={(value) => addCommentHandler({ value, logginedUserId })}
+        formSubmitHandler={(value) =>
+          addCommentHandler({ value, logginedUserId })
+        }
       />
       {/* end added comment form  */}
       <div className="space-y-4 mt-8">
         {mainComments.map((comment) => (
-          <Comments comment={comment} logginedUserId={logginedUserId} />
+          <Comments
+            comment={comment}
+            logginedUserId={logginedUserId}
+            affectedComment={affectedComment}
+            setAffectedComment={setAffectedComment}
+          />
         ))}
       </div>
     </div>
