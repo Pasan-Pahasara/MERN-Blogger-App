@@ -63,7 +63,7 @@ const Comments = ({
       {/* end user profile picture */}
       <div className="flex-1 flex flex-col">
         {/* start user name */}
-        <h5 className="font-bold text-dark-hard text-xs">
+        <h5 className="font-bold text-dark-hard text-xs lg:text-sm">
           {comment.user.name}
         </h5>
         {/* end user name */}

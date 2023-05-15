@@ -38,7 +38,7 @@ const CommentForm = ({
           onChange={(e) => setvalue(e.target.value)}
         />
         {/* end textarea & start button */}
-        <div className="flex items-center gap-x-2 pt-2">
+        <div className="flex flex-col-reverse gap-y-2 items-center gap-x-2 pt-2 min-[420px]:flex-row">
           {formCancleHandler && <button onClick={formCancleHandler} className="px-6 py-2.5 rounded-lg border border-red-500 text-red-500">
             Cancel</button>}
           <button
