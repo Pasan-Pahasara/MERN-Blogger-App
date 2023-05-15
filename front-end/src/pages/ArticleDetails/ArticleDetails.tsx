@@ -90,14 +90,22 @@ const ArticleDetails = () => {
             <CommentsContainer className="mt-10" value="" logginedUserId="a" />
             {/* end comments container  */}
           </article>
-          {/* start suggested posts */}
-          <SuggestPosts
-            header={"Latest Articles"}
-            posts={postsData}
-            tags={tagsData}
-            className="mt-8 lg:mt-0 lg-max-w-xs"
-          />
-          {/* end suggested posts */}
+          <div>
+            {/* start suggested posts */}
+            <SuggestPosts
+              header={"Latest Articles"}
+              posts={postsData}
+              tags={tagsData}
+              className="mt-8 lg:mt-0 lg-max-w-xs"
+            />
+            {/* end suggested posts */}
+            <div className="mt-7">
+              <h2 className="font-Ubuntu font-medium text-dark-hard mb-4 md:text-xl">
+                Share On:
+              </h2>
+
+            </div>
+          </div>
         </section>
         {/* end articleDetails section */}
       </MainLayout>
