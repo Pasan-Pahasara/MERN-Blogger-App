@@ -103,7 +103,9 @@ const Comments = ({
         {isReplying && (
           <CommentForm
             btnLabel="Reply"
-            formSubmitHandler={(value) => addComment(value, repiledCommentId)}
+            formSubmitHandler={(value) =>
+              addComment(value, repiledCommentId, replyOnUserId)
+            }
           />
         )}
       </div>

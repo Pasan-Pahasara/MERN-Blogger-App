@@ -92,8 +92,7 @@ const CommentsContainer = ({
             logginedUserId={logginedUserId}
             affectedComment={affectedComment}
             setAffectedComment={setAffectedComment}
-            addComment={addCommentHandler}
-          />
+            addComment={addCommentHandler} parentId={undefined}          />
         ))}
       </div>
     </div>
