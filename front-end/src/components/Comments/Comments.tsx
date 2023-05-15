@@ -33,6 +33,9 @@ const Comments = ({
   // start reply comment ID
   const repiledCommentId = parentId ? parentId : comment._id;
   // end reply comment ID
+  // start reply user ID
+  const replyOnUserId = comment.user._id;
+  // end reply user ID
 
   return (
     // start comment wrapper
