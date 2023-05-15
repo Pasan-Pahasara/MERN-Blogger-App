@@ -5,6 +5,7 @@ import images from "../../constants/Images/images";
 import { Link } from "react-router-dom";
 import SuggestPosts from "./container/SuggestedPosts/SuggestPosts";
 import CommentsContainer from "../../components/Comments/CommentsContainer/CommentsContainer";
+import SocialShareButtons from "../../components/SocialShareButtons/SocialShareButtons";
 
 const breadCrumbsData = [
   { name: "Home", link: "/" },
@@ -99,12 +100,14 @@ const ArticleDetails = () => {
               className="mt-8 lg:mt-0 lg-max-w-xs"
             />
             {/* end suggested posts */}
+            {/* start social share buttons */}
             <div className="mt-7">
               <h2 className="font-Ubuntu font-medium text-dark-hard mb-4 md:text-xl">
                 Share On:
               </h2>
-
+              <SocialShareButtons />
             </div>
+            {/* end social share buttons */}
           </div>
         </section>
         {/* end articleDetails section */}
