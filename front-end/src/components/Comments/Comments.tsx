@@ -12,6 +12,7 @@ interface CommentsProps {
   setAffectedComment: any;
   addComment: any;
   parentId: any;
+  updateComment: any;
 }
 
 const Comments = ({
@@ -21,6 +22,7 @@ const Comments = ({
   setAffectedComment,
   addComment,
   parentId = null,
+  updateComment,
 }: CommentsProps) => {
   const isUserLoggined = Boolean(logginedUserId);
   const commentBelongsToUser = logginedUserId === comment.user._id;
@@ -30,12 +32,12 @@ const Comments = ({
     affectedComment.type === "replying" &&
     affectedComment._id === comment._id;
   // end replying condition
-   // start editing condition
-   const isEditing =
-   affectedComment &&
-   affectedComment.type === "rditing" &&
-   affectedComment._id === comment._id;
- // end editing condition
+  // start editing condition
+  const isEditing =
+    affectedComment &&
+    affectedComment.type === "editing" &&
+    affectedComment._id === comment._id;
+  // end editing condition
   // start reply comment ID
   const repiledCommentId = parentId ? parentId : comment._id;
   // end reply comment ID
@@ -69,11 +71,23 @@ const Comments = ({
           })}
         </span>
         {/* end commented date */}
-        {/* start user description */}
-        <p className="font-opensans mt-[10px] text-dark-light">
-          {comment.desc}
-        </p>
-        {/* end user description */}
+        {!isEditing && (
+          // start user description
+          <p className="font-opensans mt-[10px] text-dark-light">
+            {comment.desc}
+          </p>
+          // end user description
+        )}
+
+        {isEditing && (
+          <CommentForm
+            btnLabel="Update"
+            formSubmitHandler={(value) => updateComment(value, comment._id)}
+            formCancleHandler={() => setAffectedComment(null)}
+            initialText={comment.desc}
+          />
+        )}
+
         <div className="flex items-center gap-x-3 text-dark-light font-Ubuntu text-sm mt-3 mb-3">
           {isUserLoggined && (
             // start reply button
@@ -114,11 +128,8 @@ const Comments = ({
         {isReplying && (
           <CommentForm
             btnLabel="Reply"
-            formSubmitHandler={(value) =>
-              addComment(value, repiledCommentId, replyOnUserId)
-            }
-            formCancleHandler={() => setAffectedComment(null)}
-          />
+            formSubmitHandler={(value) => addComment(value, repiledCommentId, replyOnUserId)}
+            formCancleHandler={() => setAffectedComment(null)} initialText={undefined}          />
         )}
       </div>
     </div>

@@ -72,19 +72,28 @@ const CommentsContainer = ({
       return [newComment, ...curState];
     });
     // end set comments
+    setAffectedComment(null);
   };
   // end add comment
+
+  const updateCommentHandler = (value: any, commentId: string) => {
+    const updateComments = comments.map((comment) => {
+      if (comment._id === commentId) {
+        return { ...comment, desc: value };
+      }
+      return comment;
+    });
+    setComments(updateComments);
+    setAffectedComment(null);
+  };
 
   return (
     <div className={`${className}`}>
       {/* start added comment form  */}
       <CommentForm
         btnLabel="Send"
-        formSubmitHandler={(value) =>
-          addCommentHandler({ value, logginedUserId })
-        }
-        formCancleHandler={undefined}
-      />
+        formSubmitHandler={(value) => addCommentHandler({ value, logginedUserId })}
+        formCancleHandler={undefined} initialText={undefined}      />
       {/* end added comment form  */}
       <div className="space-y-4 mt-8">
         {mainComments.map((comment) => (
@@ -96,6 +105,7 @@ const CommentsContainer = ({
             setAffectedComment={setAffectedComment}
             addComment={addCommentHandler}
             parentId={undefined}
+            updateComment={updateCommentHandler}
           />
         ))}
       </div>

@@ -4,15 +4,17 @@ interface CommentsFormProps {
   btnLabel?: string;
   formSubmitHandler: (comment: string) => void;
   formCancleHandler: any;
+  initialText:any;
 }
 
 const CommentForm = ({
   btnLabel,
   formSubmitHandler,
   formCancleHandler = null,
+  initialText="",
 }: CommentsFormProps) => {
   // start value state
-  const [value, setvalue] = useState("");
+  const [value, setvalue] = useState(initialText);
   // end value state
 
   // start submitHandler
