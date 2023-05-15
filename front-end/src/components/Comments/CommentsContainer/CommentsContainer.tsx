@@ -6,7 +6,7 @@ import Comments from "../Comments";
 // start introducing props
 interface CommentsContainerProps {
   className?: string;
-  value: string;
+  value: any;
   logginedUserId: string;
 }
 // end introducing props
@@ -92,6 +92,7 @@ const CommentsContainer = ({
             logginedUserId={logginedUserId}
             affectedComment={affectedComment}
             setAffectedComment={setAffectedComment}
+            addComment={addCommentHandler}
           />
         ))}
       </div>

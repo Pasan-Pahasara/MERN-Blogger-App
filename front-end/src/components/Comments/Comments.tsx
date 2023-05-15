@@ -3,12 +3,15 @@ import images from "../../constants/Images/images";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import CommentForm from "./CommentForm/CommentForm";
 
 interface CommentsProps {
   comment: any;
   logginedUserId: string;
   affectedComment: any;
   setAffectedComment: any;
+  addComment: any;
+  parentId: any;
 }
 
 const Comments = ({
@@ -16,15 +19,20 @@ const Comments = ({
   logginedUserId,
   affectedComment,
   setAffectedComment,
+  addComment,
+  parentId = null,
 }: CommentsProps) => {
   const isUserLoggined = Boolean(logginedUserId);
   const commentBelongsToUser = logginedUserId === comment.user._id;
-  // start replying condition 
+  // start replying condition
   const isReplying =
     affectedComment &&
     affectedComment.type === "replying" &&
     affectedComment._id === comment._id;
-  // end replying condition 
+  // end replying condition
+  // start reply comment ID
+  const repiledCommentId = parentId ? parentId : comment._id;
+  // end reply comment ID
 
   return (
     // start comment wrapper
@@ -89,6 +97,12 @@ const Comments = ({
             </>
           )}
         </div>
+        {isReplying && (
+          <CommentForm
+            btnLabel="Reply"
+            formSubmitHandler={(value) => addComment(value, repiledCommentId)}
+          />
+        )}
       </div>
     </div>
     // end comment wrapper
