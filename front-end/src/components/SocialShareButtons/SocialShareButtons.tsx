@@ -33,6 +33,13 @@ const SocialShareButtons = ({url, title }:SocialShareButtonsProps) => {
       >
         <GitHubIcon className="text-[#171515] w-12 h-auto" />
       </a>
+      <a
+        target="_blank"
+        rel="noreferrer"
+        href={`=${url}`}
+      >
+        <TwitterIcon className="text-[#1DA1F2] w-12 h-auto" />
+      </a>
     </div>
   )
 }
