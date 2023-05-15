@@ -5,6 +5,8 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import CommentForm from "./CommentForm/CommentForm";
 
+
+
 interface CommentsProps {
   comment: any;
   logginedUserId: string;
@@ -13,7 +15,8 @@ interface CommentsProps {
   addComment: any;
   parentId: any;
   updateComment: any;
-  deleteComment:any;
+  deleteComment: any;
+  replies: any;
 }
 
 const Comments = ({
@@ -25,6 +28,7 @@ const Comments = ({
   parentId = null,
   updateComment,
   deleteComment,
+  replies,
 }: CommentsProps) => {
   const isUserLoggined = Boolean(logginedUserId);
   const commentBelongsToUser = logginedUserId === comment.user._id;
@@ -119,7 +123,10 @@ const Comments = ({
               </button>
               {/* end edit button  */}
               {/* start delete button  */}
-              <button className="flex items-center space-x-2" onClick={() => deleteComment(comment._id)}>
+              <button
+                className="flex items-center space-x-2"
+                onClick={() => deleteComment(comment._id)}
+              >
                 <DeleteOutlineIcon className="w-4 h-auto" />
                 <span>Delete</span>
               </button>
@@ -130,9 +137,31 @@ const Comments = ({
         {isReplying && (
           <CommentForm
             btnLabel="Reply"
-            formSubmitHandler={(value) => addComment(value, repiledCommentId, replyOnUserId)}
-            formCancleHandler={() => setAffectedComment(null)} initialText={undefined}          />
+            formSubmitHandler={(value) =>
+              addComment(value, repiledCommentId, replyOnUserId)
+            }
+            formCancleHandler={() => setAffectedComment(null)}
+            initialText={undefined}
+          />
         )}
+        {/* {replies.length > 0 && ( */}
+        <div>
+          {replies.map((reply: { _id: React.Key | null | undefined; }) => (
+            <Comments
+              key={reply._id}
+              addComment={addComment}
+              affectedComment={affectedComment}
+              setAffectedComment={setAffectedComment}
+              comment={reply}
+              deleteComment={deleteComment}
+              logginedUserId={logginedUserId}
+              replies={[]}
+              updateComment={updateComment}
+              parentId={comment._id}
+            />
+          ))}
+        </div>
+        {/* )} */}
       </div>
     </div>
     // end comment wrapper
