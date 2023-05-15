@@ -30,6 +30,12 @@ const Comments = ({
     affectedComment.type === "replying" &&
     affectedComment._id === comment._id;
   // end replying condition
+   // start editing condition
+   const isEditing =
+   affectedComment &&
+   affectedComment.type === "rditing" &&
+   affectedComment._id === comment._id;
+ // end editing condition
   // start reply comment ID
   const repiledCommentId = parentId ? parentId : comment._id;
   // end reply comment ID
@@ -86,7 +92,12 @@ const Comments = ({
           {commentBelongsToUser && (
             <>
               {/* start edit button  */}
-              <button className="flex items-center space-x-2">
+              <button
+                className="flex items-center space-x-2"
+                onClick={() =>
+                  setAffectedComment({ type: "editing", _id: comment._id })
+                }
+              >
                 <ModeEditOutlineOutlinedIcon className="w-4 h-auto" />
                 <span>Edit</span>
               </button>
@@ -106,7 +117,7 @@ const Comments = ({
             formSubmitHandler={(value) =>
               addComment(value, repiledCommentId, replyOnUserId)
             }
-            formCancleHandler={()=> setAffectedComment(null)}
+            formCancleHandler={() => setAffectedComment(null)}
           />
         )}
       </div>
