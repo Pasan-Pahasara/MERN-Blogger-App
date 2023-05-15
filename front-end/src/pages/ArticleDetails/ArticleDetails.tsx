@@ -105,7 +105,10 @@ const ArticleDetails = () => {
               <h2 className="font-Ubuntu font-medium text-dark-hard mb-4 md:text-xl">
                 Share On:
               </h2>
-              <SocialShareButtons />
+              <SocialShareButtons
+                url={encodeURI("")}
+                title={encodeURIComponent("")}
+              />
             </div>
             {/* end social share buttons */}
           </div>
