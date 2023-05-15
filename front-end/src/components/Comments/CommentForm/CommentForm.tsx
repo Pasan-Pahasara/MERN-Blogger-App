@@ -3,9 +3,14 @@ import React, { useState } from "react";
 interface CommentsFormProps {
   btnLabel?: string;
   formSubmitHandler: (comment: string) => void;
+  formCancleHandler: any;
 }
 
-const CommentForm = ({ btnLabel, formSubmitHandler }: CommentsFormProps) => {
+const CommentForm = ({
+  btnLabel,
+  formSubmitHandler,
+  formCancleHandler = null,
+}: CommentsFormProps) => {
   // start value state
   const [value, setvalue] = useState("");
   // end value state
@@ -31,13 +36,17 @@ const CommentForm = ({ btnLabel, formSubmitHandler }: CommentsFormProps) => {
           onChange={(e) => setvalue(e.target.value)}
         />
         {/* end textarea & start button */}
-        <button
-          type="submit"
-          className="px-6 py-2.5 rounded-lg bg-purple-600 text-white font-semibold mt-2"
-        >
-          {btnLabel}
-        </button>
-        {/* start button  */}
+        <div className="flex items-center gap-x-2 pt-2">
+          {formCancleHandler && <button onClick={formCancleHandler} className="px-6 py-2.5 rounded-lg border border-red-500 text-red-500">
+            Cancel</button>}
+          <button
+            type="submit"
+            className="px-6 py-2.5 rounded-lg bg-purple-600 text-white font-semibold"
+          >
+            {btnLabel}
+          </button>
+        </div>
+        {/* end button */}
       </div>
     </form>
     // end form

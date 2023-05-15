@@ -83,16 +83,20 @@ const CommentsContainer = ({
         formSubmitHandler={(value) =>
           addCommentHandler({ value, logginedUserId })
         }
+        formCancleHandler={undefined}
       />
       {/* end added comment form  */}
       <div className="space-y-4 mt-8">
         {mainComments.map((comment) => (
           <Comments
+            key={comment._id}
             comment={comment}
             logginedUserId={logginedUserId}
             affectedComment={affectedComment}
             setAffectedComment={setAffectedComment}
-            addComment={addCommentHandler} parentId={undefined}          />
+            addComment={addCommentHandler}
+            parentId={undefined}
+          />
         ))}
       </div>
     </div>

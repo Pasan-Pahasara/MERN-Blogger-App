@@ -106,6 +106,7 @@ const Comments = ({
             formSubmitHandler={(value) =>
               addComment(value, repiledCommentId, replyOnUserId)
             }
+            formCancleHandler={()=> setAffectedComment(null)}
           />
         )}
       </div>
