@@ -76,6 +76,7 @@ const CommentsContainer = ({
   };
   // end add comment
 
+  // start update comment handler
   const updateCommentHandler = (value: any, commentId: string) => {
     const updateComments = comments.map((comment) => {
       if (comment._id === commentId) {
@@ -86,14 +87,28 @@ const CommentsContainer = ({
     setComments(updateComments);
     setAffectedComment(null);
   };
+  // end update comment handler
+
+  // start delete comment handler
+  const deleteCommentHandler = (commentId: string) => {
+    const updatedComments =comments.filter((comment) =>{
+      return comment._id !== commentId
+    })
+    setComments(updatedComments)
+  };
+  // end delete comment handler
 
   return (
     <div className={`${className}`}>
       {/* start added comment form  */}
       <CommentForm
         btnLabel="Send"
-        formSubmitHandler={(value) => addCommentHandler({ value, logginedUserId })}
-        formCancleHandler={undefined} initialText={undefined}      />
+        formSubmitHandler={(value) =>
+          addCommentHandler({ value, logginedUserId })
+        }
+        formCancleHandler={undefined}
+        initialText={undefined}
+      />
       {/* end added comment form  */}
       <div className="space-y-4 mt-8">
         {mainComments.map((comment) => (
@@ -106,6 +121,7 @@ const CommentsContainer = ({
             addComment={addCommentHandler}
             parentId={undefined}
             updateComment={updateCommentHandler}
+            deleteComment={deleteCommentHandler}
           />
         ))}
       </div>

@@ -13,6 +13,7 @@ interface CommentsProps {
   addComment: any;
   parentId: any;
   updateComment: any;
+  deleteComment:any;
 }
 
 const Comments = ({
@@ -23,6 +24,7 @@ const Comments = ({
   addComment,
   parentId = null,
   updateComment,
+  deleteComment,
 }: CommentsProps) => {
   const isUserLoggined = Boolean(logginedUserId);
   const commentBelongsToUser = logginedUserId === comment.user._id;
@@ -117,7 +119,7 @@ const Comments = ({
               </button>
               {/* end edit button  */}
               {/* start delete button  */}
-              <button className="flex items-center space-x-2">
+              <button className="flex items-center space-x-2" onClick={() => deleteComment(comment._id)}>
                 <DeleteOutlineIcon className="w-4 h-auto" />
                 <span>Delete</span>
               </button>
