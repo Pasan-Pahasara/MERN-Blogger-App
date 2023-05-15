@@ -19,6 +19,13 @@ const SocialShareButtons = ({url, title }:SocialShareButtonsProps) => {
       >
         <FacebookIcon className="text-[#3b5998] w-12 h-auto" />
       </a>
+      <a
+        target="_blank"
+        rel="noreferrer"
+        href={`=${url}`}
+      >
+        <InstagramIcon className="text-[#E1306C] w-12 h-auto" />
+      </a>
     </div>
   )
 }
