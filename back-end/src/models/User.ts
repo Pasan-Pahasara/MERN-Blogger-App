@@ -48,4 +48,4 @@ const UserSchema = new Schema(
 );
 // end passed the properties object
 
-export const User = model<IUser>("User, UserSchema");
+export const User = model<IUser>("User", UserSchema);
