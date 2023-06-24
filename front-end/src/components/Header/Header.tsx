@@ -4,30 +4,37 @@ import CloseIcon from "@mui/icons-material/Close";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useNavigate } from "react-router-dom";
 
+interface NavItem {
+  title: string;
+  link: string;
+}
+
 const NavItemsInfo = [
   { name: "Home", type: "link" },
   { name: "Articles", type: "link" },
-  { name: "Pages", type: "dropdown", items: ["About us", "Contact us"] },
+  {
+    name: "Pages",
+    type: "dropdown",
+    items: [
+      { title: "About us", link: "/about" },
+      { title: "Contact us", link: "/contact" },
+    ],
+  },
 ];
 
 interface HeaderProps {
-  // Add the "item" property to the type definition
   item: {
     name: string;
     type: string;
-    items?: string[];
+    items?: NavItem[];
   };
 }
 
-const NavItem = ({ item }: HeaderProps) => {
-  // mobile size dropdown
+const NavItem: React.FC<HeaderProps> = ({ item }) => {
   const [dropdown, setDropdown] = useState(false);
 
-  // I added function for changing or dropdown state
   const toggleDropdownHandler = () => {
-    setDropdown((curState) => {
-      return !curState;
-    });
+    setDropdown((curState) => !curState);
   };
 
   return (
@@ -59,10 +66,10 @@ const NavItem = ({ item }: HeaderProps) => {
               {item.items?.map((page, index) => (
                 <a
                   key={index}
-                  href="/"
+                  href={page.link}
                   className="hover:bg-dark-hard hover:text-white px-4 py-2 text-white lg:text-dark-soft"
                 >
-                  {page}
+                  {page.title}
                 </a>
               ))}
             </ul>
@@ -73,17 +80,12 @@ const NavItem = ({ item }: HeaderProps) => {
   );
 };
 
-const Header = () => {
-  // define an state visible or unvisible
+const Header: React.FC = () => {
   const [navIsVisible, setNavIsVisible] = useState(false);
-  // useNavigate hook
   const navigate = useNavigate();
 
-  // define a handler for toggling my nav is visible state so nav
   const navVisibilityHandler = () => {
-    setNavIsVisible((curState) => {
-      return !curState;
-    });
+    setNavIsVisible((curState) => !curState);
   };
 
   return (
@@ -97,21 +99,20 @@ const Header = () => {
             <MenuIcon className="w-6 h-6" onClick={navVisibilityHandler} />
           )}
         </div>
-        {/* introducing dynamic class suite string */}
         <div
           className={`${
             navIsVisible ? "right-0" : "-right-full "
           } transition-all duration-300 mt-[56px] lg:mt-0 bg-dark-hard lg:bg-transparent z-[49] flex flex-col w-full lg:w-auto justify-center lg:justify-end lg:flex-row fixed top-0 bottom-0 lg:static gap-x-9 items-center`}
         >
           <ul className="text-white items-center gap-y-5 lg:text-dark-soft flex flex-col lg:flex-row gap-x-2 font-semibold font-Ubuntu">
-            {/* Use map function to render all the nav items */}
-            {NavItemsInfo.map((item) => (
-              <NavItem key={item.name} item={item} />
+            {NavItemsInfo.map((item, index) => (
+              <NavItem key={index} item={item} />
             ))}
           </ul>
-          <button 
-           onClick={() => navigate("/contact")}
-          className="mt-5 lg:mt-0 font-Ubuntu border-2 border-purple-600 px-6 py-2 rounded-full text-purple-600 font-semibold hover:bg-purple-600 hover:text-white transition-all duration-300 text-center">
+          <button
+            onClick={() => navigate("/login")}
+            className="mt-5 lg:mt-0 font-Ubuntu border-2 border-purple-600 px-6 py-2 rounded-full text-purple-600 font-semibold hover:bg-purple-600 hover:text-white transition-all duration-300 text-center"
+          >
             Sign in
           </button>
         </div>

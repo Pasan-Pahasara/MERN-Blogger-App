@@ -64,6 +64,7 @@ function Contact() {
               <div className="flex justify-center">
                 <button
                   type="submit"
+                  disabled={false}
                   className="btn bg-purple-500 text-white px-6 py-2 rounded-full hover:bg-purple-600 w-full shadow-sm"
                 >
                   Send Message
