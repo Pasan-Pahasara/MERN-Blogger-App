@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { useNavigate } from "react-router-dom";
+
 const NavItemsInfo = [
   { name: "Home", type: "link" },
   { name: "Articles", type: "link" },
   { name: "Pages", type: "dropdown", items: ["About us", "Contact us"] },
-  { name: "Pricing", type: "link" },
-  { name: "Faq", type: "link" },
 ];
 
 interface HeaderProps {
@@ -76,6 +76,8 @@ const NavItem = ({ item }: HeaderProps) => {
 const Header = () => {
   // define an state visible or unvisible
   const [navIsVisible, setNavIsVisible] = useState(false);
+  // useNavigate hook
+  const navigate = useNavigate();
 
   // define a handler for toggling my nav is visible state so nav
   const navVisibilityHandler = () => {
@@ -107,7 +109,9 @@ const Header = () => {
               <NavItem key={item.name} item={item} />
             ))}
           </ul>
-          <button className="mt-5 lg:mt-0 font-Ubuntu border-2 border-purple-600 px-6 py-2 rounded-full text-purple-600 font-semibold hover:bg-purple-600 hover:text-white transition-all duration-300 text-center">
+          <button 
+           onClick={() => navigate("/login")}
+          className="mt-5 lg:mt-0 font-Ubuntu border-2 border-purple-600 px-6 py-2 rounded-full text-purple-600 font-semibold hover:bg-purple-600 hover:text-white transition-all duration-300 text-center">
             Sign in
           </button>
         </div>
