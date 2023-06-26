@@ -8,6 +8,7 @@ import Register from "./pages/Register/Register";
 import Contact from "./pages/Contact/Contact";
 import About from "./pages/About/About";
 import AdminLayout from "./pages/admin/AdminLayout";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/about" element={<About />}></Route>
-        <Route path="/admin" element={<AdminLayout />}></Route>
+        <Route path="/admin" element={<Profile />}></Route>
       </Routes>
       {/* end routes  */}
     </div>

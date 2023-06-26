@@ -16,7 +16,7 @@ function Contact() {
             <div className="w-full md:w-1/2 mb-8 md:mb-0">
               <iframe
                 className="map h-80 md:h-96 w-full rounded-2xl md:mt-4 shadow-2xl"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59017.34874467167!2d80.17079711159644!3d6.055889995979885!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae173bb6932fce3%3A0x4a35b903f9c64c03!2sGalle!5e1!3m2!1sen!2slk!4v1687604264454!5m2!1sen!2slk"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.688024656764!2d80.20269457657423!3d6.0374788783437445!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae1739679cea25b%3A0x4edf49e4cc9048a0!2sIJSE%20-%20Institute%20of%20Software%20Engineering%20(Galle%20Branch)!5e0!3m2!1sen!2slk!4v1687619786267!5m2!1sen!2slk"
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
