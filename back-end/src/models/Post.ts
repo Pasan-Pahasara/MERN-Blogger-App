@@ -1,52 +1,54 @@
 import { Document,Schema, model } from "mongoose";
 
 export interface IPost extends Document {
+    image: String;
     title: String;
     caption: String;
-    slug: String;
-    body: String;
-    photo: String;
-    user: String;
+    description: String;
+    date?: String;
+    userName?: String;
     tags: String[];
-    categories: String[];
+    categoryId: string;
 }
 
-const PostSchema = new Schema(
+const PostSchema = new Schema<IPost>(
     {
-        title: {
+        image: { // image is the url of the image
             type: String,
             required: true,
         },
-        caption: {
+        title: { // title is the heading of the post
             type: String,
             required: true,
         },
-        slug: {
+        caption: {  // caption is the short description of the post
             type: String,
             required: true,
         },
-        body: {
+        description: { // description is the long description of the post
             type: String,
             required: true,
         },
-        photo: {
+        date: { // date is the date of the post
             type: String,
             required: true,
         },
-        user: { 
+        userName: { // userName is the name of the user who posted the post
             type: String,
             required: true,
         },
-        tags: {
-            type: Array<String>,
-            required: true,
-        },
-        categories: {
+        tags: [ // tags is the array of tags of the post
+            {
+                type: String,
+                required: true,
+            },
+        ],
+        categoryId: { // categoryId is the id of the category of the post 
             type: String,
             required: true,
         },
     },
     { timestamps: true }
-);
+);      
 
 export const Post = model<IPost>("Post", PostSchema);

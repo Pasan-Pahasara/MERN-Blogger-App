@@ -6,7 +6,7 @@ export default class PostController {
     res: Response
   ): Promise<Response> => {
     //create operation
-    
+  
     return res;
   };
 
