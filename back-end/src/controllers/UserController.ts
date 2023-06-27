@@ -1,44 +1,29 @@
 import { Request, RequestHandler, Response } from "express";
-import { User } from "../models/User";
+import { User, IUser } from "../models/User";
 
-export default class UserController {
-  registerUser: RequestHandler = async (
+export default class UserController { // UserController is the controller of the user
+  registerUser: RequestHandler = async ( // registerUser is the function to register a user
     req: Request,
     res: Response
-  ): Promise<Response> => {
+  ): Promise<Response> => { // Promise<Response> is the return type of the function
     //create operation
-    // try {
-    //   const { name, email, password } = req.body;
+    try {
+      const { email, password } = req.body; // destructuring assignment
 
-    //   //check whether the user exists or not
-    //   let user = await User.findOne({ email });
+      const existingUser = await User.findOne({ email }); // check if user with the same email already exists
+      if (existingUser) {
+        return res
+          .status(400)
+          .json({ message: "User with this email already exists" });
+      }
 
-    //   if (user) {
-    //     return res
-    //       .status(400)
-    //       .json({ message: "User have already registered" });
-    //   }
+      const newUser: IUser = new User({ email, password }); // create a new user
 
-    //   //creating a new user
-    //   user = await User.create({
-    //     name,
-    //     email,
-    //     password,
-    //   });
-  
+      const savedUser = await newUser.save(); // save() is used to save the database
 
-    //   return res.status(201).json({
-    //     _id: user._id,
-    //     avatar: user.avatar,
-    //     name: user.name,
-    //     email: user.email,
-    //     verified: user.verified,
-    //     admin: user.admin,
-    //     token: null,
-    //   });
-    // } catch (error) {
-    //   return res.status(500).json({ message: "Something went wrong" });
-    // }
-    return res;
+      return res.status(201).json(savedUser); // return the response
+    } catch (error) {
+      return res.status(500).json({ message: "Internal server error" });
+    }
   };
 }
