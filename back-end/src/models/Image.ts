@@ -1,6 +1,6 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Document } from "mongoose";
 
-export interface IImage {
+export interface IImage extends Document{
   // IImage is the interface of the image
   imageId: string;
   imageUrl: string;
