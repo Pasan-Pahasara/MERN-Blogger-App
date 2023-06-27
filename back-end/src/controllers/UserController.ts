@@ -13,7 +13,11 @@ export default class UserController {
     try {
       const { name, email, password } = req.body; // destructuring assignment
 
-      let user = await User.findOne({ name:name, email: email, password:password }); // check if user with the same email already exists
+      let user = await User.findOne({
+        name: name,
+        email: email,
+        password: password,
+      }); // check if user with the same email already exists
       if (!user) {
         // save user only the email is not existing
         user = new User({ name, email, password }); // create a new user
@@ -25,7 +29,8 @@ export default class UserController {
       } else {
         return res.status(200).json({ message: "Already exists." });
       }
-    } catch (error: unknown) { // catch block is used to handle the errors
+    } catch (error: unknown) {
+      // catch block is used to handle the errors
       if (error instanceof Error) {
         return res.status(500).json({ message: error.message });
       } else {
@@ -124,7 +129,37 @@ export default class UserController {
     res: Response
   ): Promise<Response> => {
     // Promise<Response> is the return type of the function
-    //sign-in operation
-    return res;
+    try {
+      const { name, email, password } = req.body; // destructuring assignment
+
+      const user = await User.findOne({ email: email }); // find the user by email
+
+      if (user) {
+        // check whether the user exists or not
+        if (user.password == password) {
+          // check whether the password is correct or not
+          return res.status(200).json({
+            message: "Login Successfull..!",
+            responseData: { name: user.name, email },
+          });
+        } else {
+          return res.status(500).json({
+            // return the response
+            message: "Your Password is Wrong..!",
+            responseData: password,
+          });
+        }
+      } else {
+        // return the response
+        return res
+          .status(500)
+          .json({ message: "Your Email is Wrong..!", responseData: email });
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error)
+        return res.status(500).json({ message: error.message });
+
+      return res.status(500).json({ message: "Unknown Error Occured..!" });
+    }
   };
 }

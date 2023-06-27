@@ -20,7 +20,7 @@ export default class UserRoutes {
     // DELETE /api/v1/user/:id
     this.router.delete("/:id", this.userController.deleteUser); // deleteUser is the function to delete a user
     // GET /api/v1/user/sign-in
-    this.router.get("./sign-in", this.userController.signIn); // signIn is the function to sign in a user
+    this.router.get("/sign-in", this.userController.signIn); // signIn is the function to sign in a user
   };
 
   public getRouter = (): Router => {
