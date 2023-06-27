@@ -12,7 +12,7 @@ export default class UserRoutes {
 
   private configRoutes = (): void => {
     // POST /api/v1/user
-    this.router.post("./", this.userController.registerUser); // registerUser is the function to register a user
+    this.router.post("/", this.userController.registerUser); // registerUser is the function to register a user
     // GET /api/v1/user
     this.router.get("/", this.userController.retrieveAllUsers); // retrieveAllUsers is the function to retrieve all the users
     // PUT /api/v1/user/:id

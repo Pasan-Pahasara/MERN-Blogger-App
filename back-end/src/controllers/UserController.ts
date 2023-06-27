@@ -1,5 +1,5 @@
 import { Request, RequestHandler, Response } from "express";
-import { User, IUser } from "../models/User";
+import { User } from "../models/User";
 
 export default class UserController {
   // UserController is the controller of the user
@@ -11,22 +11,26 @@ export default class UserController {
     // Promise<Response> is the return type of the function
     //create operation
     try {
-      const { email, password } = req.body; // destructuring assignment
+      const { name, email, password } = req.body; // destructuring assignment
 
-      const existingUser = await User.findOne({ email }); // check if user with the same email already exists
-      if (existingUser) {
+      let user = await User.findOne({ name:name, email: email, password:password }); // check if user with the same email already exists
+      if (!user) {
+        // save user only the email is not existing
+        user = new User({ name, email, password }); // create a new user
+        user = await user.save(); // save() is used to save the document
+
         return res
-          .status(400)
-          .json({ message: "User with this email already exists" });
+          .status(200)
+          .json({ message: "New user added.!", responseData: user });
+      } else {
+        return res.status(200).json({ message: "Already exists." });
       }
-
-      const newUser: IUser = new User({ email, password }); // create a new user
-
-      const savedUser = await newUser.save(); // save() is used to save the database
-
-      return res.status(201).json(savedUser); // return the response
-    } catch (error) {
-      return res.status(500).json({ message: "Internal server error" });
+    } catch (error: unknown) { // catch block is used to handle the errors
+      if (error instanceof Error) {
+        return res.status(500).json({ message: error.message });
+      } else {
+        return res.status(500).json({ message: "Unknown error occured." });
+      }
     }
   };
 
