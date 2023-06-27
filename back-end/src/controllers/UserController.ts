@@ -1,11 +1,14 @@
 import { Request, RequestHandler, Response } from "express";
 import { User, IUser } from "../models/User";
 
-export default class UserController { // UserController is the controller of the user
-  registerUser: RequestHandler = async ( // registerUser is the function to register a user
+export default class UserController {
+  // UserController is the controller of the user
+  registerUser: RequestHandler = async (
+    // registerUser is the function to register a user
     req: Request,
     res: Response
-  ): Promise<Response> => { // Promise<Response> is the return type of the function
+  ): Promise<Response> => {
+    // Promise<Response> is the return type of the function
     //create operation
     try {
       const { email, password } = req.body; // destructuring assignment
@@ -27,16 +30,19 @@ export default class UserController { // UserController is the controller of the
     }
   };
 
-  retrieveAllUsers: RequestHandler = async ( // retrieveAllUsers is the function to retrieve all the users
+  retrieveAllUsers: RequestHandler = async (
+    // retrieveAllUsers is the function to retrieve all the users
     req: Request,
     res: Response
-  ): Promise<Response> => { // Promise<Response> is the return type of the function 
+  ): Promise<Response> => {
+    // Promise<Response> is the return type of the function
     //read operation
     try {
       let users = await User.find(); // find() is used to find the documents
 
       return res.status(200).json({ responseData: users });
-    } catch (error: unknown) { // catch block is used to handle the errors
+    } catch (error: unknown) {
+      // catch block is used to handle the errors
       if (error instanceof Error) {
         return res.status(500).json({ message: error.message });
       } else {
@@ -45,32 +51,66 @@ export default class UserController { // UserController is the controller of the
     }
   };
 
-  updateUser: RequestHandler = async ( // updateUser is the function to update a user
+  updateUser: RequestHandler = async (
+    // updateUser is the function to update a user
     req: Request,
     res: Response
-  ): Promise<Response> => { // Promise<Response> is the return type of the function
+  ): Promise<Response> => {
+    // Promise<Response> is the return type of the function
     //update operation
     try {
       const { id } = req.params; // id is the id of the user
 
-      let updatedUser = await User.findByIdAndUpdate(id, req.body,{ //find the user by ID and update
+      let updatedUser = await User.findByIdAndUpdate(id, req.body, {
+        //find the user by ID and update
         new: true,
       });
 
       if (!updatedUser) {
         return res.status(404).json({ message: "User not found" });
       }
-       
-      return res
-        .status(200)
-        .json({ message: "User updated.", responseData: updatedUser });
 
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          return res.status(500).json({ message: error.message });
-        } else {
-          return res.status(500).json({ message: "Unknown error occured." });
-        }
+      return res.status(200).json({
+        message: "User updated successfully.!",
+        responseData: updatedUser,
+      });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return res.status(500).json({ message: error.message });
+      } else {
+        return res.status(500).json({ message: "Unknown error occured." });
       }
+    }
+  };
+
+  deleteUser: RequestHandler = async (
+    // deleteUser is the function to delete a user
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
+    // Promise<Response> is the return type of the function
+    //delete operation
+    try {
+      const { id } = req.params; // id is the id of the user
+
+      let deletedUser = await User.findByIdAndDelete(id); // find the user by ID and delete
+
+      if (!deletedUser) {
+        // check whether the user exists or not
+        return res.status(404).json({ message: "User not found" });
+      }
+      return res // return the response
+        .status(200)
+        .json({
+          message: "User deleted successfully.!",
+          responseData: deletedUser,
+        });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return res.status(500).json({ message: error.message });
+      } else {
+        return res.status(500).json({ message: "Unknown error occured." });
+      }
+    }
   };
 }
