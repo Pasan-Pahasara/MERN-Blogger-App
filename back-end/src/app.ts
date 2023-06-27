@@ -15,7 +15,7 @@ const app = express();
 // app.use(cors());
 
 // Here you can add more origins to allow CORS
-const allowedOrigins = ["http://localhost:4000"];
+const allowedOrigins = ["http://localhost:3000"];
 
 app.use(
   cors({
