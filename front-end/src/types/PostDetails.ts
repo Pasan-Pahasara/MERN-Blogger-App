@@ -1,8 +1,11 @@
 export type PostDetails = {
   _id: string;
-  image: string; // Add the 'image' property
-  title: string;
-  description: string;
-  date: string; // Add the 'date' property
-  userName: string; // Add the 'userName' property
+  imageId: String;
+  title: String;
+  caption: String;
+  description: String;
+  date?: String;
+  userName?: String;
+  tags: String[];
+  categoryId: string;
 };
