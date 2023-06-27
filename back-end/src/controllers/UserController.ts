@@ -113,4 +113,14 @@ export default class UserController {
       }
     }
   };
+
+  signIn: RequestHandler = async (
+    // signIn is the function to sign in
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
+    // Promise<Response> is the return type of the function
+    //sign-in operation
+    return res;
+  };
 }
