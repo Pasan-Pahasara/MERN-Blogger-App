@@ -18,7 +18,7 @@ const Login = () => {
     };
 
     axios
-      .post("user", loginDetail)
+      .post("user/sign-in", loginDetail)
       .then((res) => {
         navigate("/admin");
       })
@@ -60,7 +60,7 @@ const Login = () => {
                 type="email"
                 id="email"
                 placeholder="Enter email"
-                value={email}
+                name="email"
                 onChange={handleInputChange}
                 className={`placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border`}
               />
@@ -76,7 +76,7 @@ const Login = () => {
                 type="password"
                 id="password"
                 placeholder="Enter password"
-                value={password}
+                name="password"
                 onChange={handleInputChange}
                 className={`placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border`}
               />
