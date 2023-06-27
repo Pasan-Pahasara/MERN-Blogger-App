@@ -130,7 +130,7 @@ export default class UserController {
   ): Promise<Response> => {
     // Promise<Response> is the return type of the function
     try {
-      const { name, email, password } = req.body; // destructuring assignment
+      const { email, password } = req.body; // destructuring assignment
 
       const user = await User.findOne({ email: email }); // find the user by email
 
