@@ -6,7 +6,16 @@ export default class PostController {
     res: Response
   ): Promise<Response> => {
     //create operation
+    
+    return res;
+  };
 
+  retrieveAllPost: RequestHandler = async (
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
+    //read operation
+    
     return res;
   };
 }
