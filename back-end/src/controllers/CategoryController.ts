@@ -31,4 +31,20 @@ export default class CategoryController { // CategoryController is the controlle
       }
     }
   };
+
+  retrieveAllCategories: RequestHandler = async ( // retrieveAllCategories is the function to retrieve all the categories
+    req: Request,
+    res: Response
+  ): Promise<Response> => { // Promise<Response> is the return type of the function
+    try {
+      let categories = await PostCategories.find(); // find() is used to find the documents
+      return res.status(200).json({ responseData: categories }); // return the response
+    } catch (error: unknown) { // catch block is used to handle the errors
+      if (error instanceof Error) { 
+        return res.status(500).json({ message: error.message });
+      } else {
+        return res.status(500).json({ message: "Unknown error occured." });
+      }
+    }
+  };
 }
