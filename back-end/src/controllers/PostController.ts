@@ -1,7 +1,7 @@
 import { RequestHandler, Request, Response } from "express";
 
 export default class PostController {
-  addPost: RequestHandler = async (
+  createPost: RequestHandler = async (
     req: Request,
     res: Response
   ): Promise<Response> => {
@@ -10,7 +10,7 @@ export default class PostController {
     return res;
   };
 
-  retrieveAllPost: RequestHandler = async (
+  retrieveAllPosts: RequestHandler = async (
     req: Request,
     res: Response
   ): Promise<Response> => {
