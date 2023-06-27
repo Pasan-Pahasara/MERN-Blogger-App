@@ -1,8 +1,46 @@
 import React from "react";
 import MainLayout from "../../components/MainLayout";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ChangeEvent, useState } from "react";
+import axios from "../../axios";
 
-function Login() {
+const Login = () => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const navigate = useNavigate();
+
+  const userLogin = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    let loginDetail = {
+      email: email,
+      password: password,
+    };
+
+    axios
+      .post("user", loginDetail)
+      .then((res) => {
+        navigate("/admin");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    switch (name) {
+      case "email":
+        setEmail(value);
+        break;
+      case "password":
+        setPassword(value);
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <MainLayout>
       <section className="container mx-auto px-5 py-10 font-opensans">
@@ -10,7 +48,7 @@ function Login() {
           <h1 className="font-roboto text-2xl font-bold text-center text-dark-hard mb-8">
             Login
           </h1>
-          <form>
+          <form onSubmit={userLogin}>
             <div className="flex flex-col mb-6 w-full">
               <label
                 htmlFor="email"
@@ -22,6 +60,8 @@ function Login() {
                 type="email"
                 id="email"
                 placeholder="Enter email"
+                value={email}
+                onChange={handleInputChange}
                 className={`placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border`}
               />
             </div>
@@ -32,15 +72,16 @@ function Login() {
               >
                 Password
               </label>
-              <input type="password" id="password" 
-                     placeholder="Enter password"
-                     className={`placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border`}
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter password"
+                value={password}
+                onChange={handleInputChange}
+                className={`placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border`}
               />
             </div>
-            <Link
-              to=""
-              className="text-sm font-semibold text-primary"
-            >
+            <Link to="" className="text-sm font-semibold text-primary">
               Forgot password?
             </Link>
             <button
