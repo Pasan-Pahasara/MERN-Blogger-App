@@ -15,7 +15,16 @@ export default class PostController {
     res: Response
   ): Promise<Response> => {
     //read operation
-    
+
+    return res;
+  };
+
+  updatePost: RequestHandler = async (
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
+    //update operation
+
     return res;
   };
 }
