@@ -1,7 +1,7 @@
 import { Document,Schema, model } from "mongoose";
 
 export interface IPost extends Document { // IPost is the interface of the post
-    image: String;
+    imageId: String;
     title: String;
     caption: String;
     description: String;
@@ -13,7 +13,7 @@ export interface IPost extends Document { // IPost is the interface of the post
 
 const PostSchema = new Schema<IPost>( // PostSchema is the schema of the post
     {
-        image: { // image is the url of the image
+        imageId: { // image is the url of the image
             type: String,
             required: true,
         },
