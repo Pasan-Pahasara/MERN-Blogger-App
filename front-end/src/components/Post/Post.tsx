@@ -33,6 +33,12 @@ type catergroy = {
   categoryName: string;
 };
 
+type image = {
+  // image type
+  _id: string;
+  imageUrl: string;
+};
+
 const deletePost = (postId: string, props: PostProps) => {
   // delete post
   axios
@@ -61,6 +67,7 @@ const Post: FC<PostProps> = (props) => {
   const [tags, setTags] = useState<string>("");
   const [categoryName, setCategoryName] = useState<string>("");
   const [categoryList, setCategoryList] = useState<catergroy[]>([]);
+  const [imageList, setImageList] = useState<image[]>([]);
 
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
@@ -68,6 +75,7 @@ const Post: FC<PostProps> = (props) => {
   useEffect(() => {
     getAllPost();
     retrieveCategoryName();
+    retrieveImage();
   }, []);
 
   const getAllPost = () => {
@@ -89,6 +97,19 @@ const Post: FC<PostProps> = (props) => {
       .then((res) => {
         console.log(res);
         setCategoryList(res.data.responseData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const retrieveImage = () => {
+    // retrieve image based on imageId
+    axios
+      .get(`image`)
+      .then((res) => {
+        console.log(res);
+        setImageList(res.data.responseData);
       })
       .catch((error) => {
         console.log(error);
@@ -276,7 +297,13 @@ const Post: FC<PostProps> = (props) => {
               </p>
             )}
           </div>
-          <img className="h-10 mt-2" alt="Image" />
+          <img
+            className="flex justify-center items-center object-cover rounded-xl shadow-xl w-full"
+            src={
+              imageList.find((image) => image._id === props.imageId)?.imageUrl
+            }
+            alt="Image"
+          />
 
           <div className="grid grid-rows-1 sm:grid-rows-2 md:grid-rows-6 justify-end">
             <button onClick={() => deletePost(props._id, props)}>
