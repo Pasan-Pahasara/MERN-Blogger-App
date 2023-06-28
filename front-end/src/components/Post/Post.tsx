@@ -262,7 +262,7 @@ const Post: FC<PostProps> = (props) => {
             )}
             {props.categoryId && (
               <p>
-                <strong>Category</strong> :{" "}
+                <strong>Category</strong> :
                 {
                   categoryList.find(
                     (category) => category._id === props.categoryId
