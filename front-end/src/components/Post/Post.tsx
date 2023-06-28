@@ -1,58 +1,64 @@
-import { Component } from "react";
+import { FC } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from '@mui/icons-material/Edit';
 import api from "../../axios";
 
 type PostProps = {
-  _id: string;
-  image: string;
-  title: string;
-  description: string;
-  date?: string;
-  userName?: string;
-  removePostFromList?: (postId: string) => void;
+  _id: String;
+  imageId: String;
+  title: String;
+  caption: String;
+  description: String;
+  date?: String;
+  userName?: String;
+  tags: String[];
+  categoryId: String;
+  removePostFromList?: (postId: String) => void;
 };
 
-type PostState = {};
+const deletePost = (postId: String, props: PostProps) => {
+  api
+    .delete(`post/${postId}`)
+    .then((res) => {
+      console.log(res);
+      if (props.removePostFromList) {
+        props.removePostFromList(postId);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
-export default class Post extends Component<PostProps, PostState> {
-  deletePost = (postId: string) => {
-    api
-      .delete(`post/${postId}`)
-      .then((res) => {
-        console.log(res);
-        if (this.props.removePostFromList) {
-          this.props.removePostFromList(postId);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+const Post: FC<PostProps> = (props) => {
+  return (
+    <div className="p-6 border border-slate-400 w-full rounded mt-2">
+      <h3 className="text-center">{props.title}</h3>
+      {props.description}
+      <span className="flex space-x-5">
+        {props.date ? (
+          <p>
+            <strong>Date</strong> : {props.date}
+          </p>
+        ) : null}
+        {props.userName ? (
+          <p>
+            <strong>User Name</strong> : {props.userName}
+          </p>
+        ) : null}
+      </span>
 
-  render() {
-    return (
-      <div className="p-6 border border-slate-400 w-full rounded mt-2">
-        <h3 className="text-center">{this.props.title}</h3>
-        {this.props.description}
-        <span className="flex space-x-5">
-          {this.props.date ? (
-            <p>
-              <strong>Date</strong> : {this.props.date}
-            </p>
-          ) : null}
-          {this.props.userName ? (
-            <p>
-              <strong>User Name</strong> : {this.props.userName}
-            </p>
-          ) : null}
-        </span>
-
-        <div className="w-full flex justify-between items-center">
-          <button onClick={() => this.deletePost(this.props._id)}>
-            <DeleteIcon />
-          </button>
-        </div>
+      <div className="w-full flex justify-between items-center">
+        <button onClick={() => deletePost(props._id, props)}>
+          <DeleteIcon />
+        </button>
+        <button onClick={() => deletePost(props._id, props)}>
+          <EditIcon />
+        </button>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default Post;
+

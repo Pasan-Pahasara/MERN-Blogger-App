@@ -12,21 +12,24 @@ const Profile = () => {
   const [postList, setPostList] = useState<PostDetails[]>([]);
   const [isClickedCreateNewPost, setIsClickedCreateNewPost] =
     useState<boolean>(false);
-  const [imageId, setImageId] = useState<string>("");
+  const [imageId, setImageId] = useState<any>(null);
   const [title, setTitle] = useState<string>("");
   const [caption, setCaption] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [date, setDate] = useState<string>("");
   const [userName, setUserName] = useState<string>("");
   const [tags, setTags] = useState<string>("");
-  const [categoryId, setCategoryId] = useState<string>("");
-  const [image, setImage] = useState("");
+  const [categoryName, setCategoryName] = useState<string>("");
 
-  useEffect(() => { // use effect
+  useEffect(() => {
+    // use effect
     retrieveAllPosts();
   }, []);
 
-  const retrieveAllPosts = () => { // retrieve all posts
+  // const filteredData = postList.filter((post) => post.userName === id);
+
+  const retrieveAllPosts = () => {
+    // retrieve all posts
     api
       .get("post")
       .then((res) => {
@@ -38,11 +41,13 @@ const Profile = () => {
       });
   };
 
-  const handleClickCreateNewPost = () => { // handle click create new post
+  const handleClickCreateNewPost = () => {
+    // handle click create new post
     setIsClickedCreateNewPost((prevState) => !prevState);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => { // handle submit
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    // handle submit
     event.preventDefault();
     console.log("Submitted");
 
@@ -54,20 +59,21 @@ const Profile = () => {
       date,
       userName,
       tags,
-      categoryId,
+      categoryName,
     });
 
     let tagsArray = convertTagStringToArray(tags);
 
-    let newPost = { // create new post object
-      imageId,
-      title,
-      caption,
-      description,
-      date,
-      userName,
+    let newPost = {
+      // create new post object
+      imageUrl: imageId,
+      title: title,
+      caption: caption,
+      description: description,
+      date: date,
+      userName: userName,
       tags: tagsArray,
-      categoryId,
+      categoryName: categoryName,
     };
 
     api
@@ -82,14 +88,16 @@ const Profile = () => {
       });
   };
 
-  const convertTagStringToArray = (tagString: string): string[] => { // convert tag string to array
+  const convertTagStringToArray = (tagString: string): string[] => {
+    // convert tag string to array
     if (tagString !== "") {
       return tagString.split(",").map((tag) => tag.trim());
     }
     return [];
   };
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => { // handle input change
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    // handle input change
     const { name, value } = event.target;
 
     switch (name) {
@@ -114,15 +122,16 @@ const Profile = () => {
       case "tags":
         setTags(value);
         break;
-      case "categoryId":
-        setCategoryId(value);
+      case "categoryName":
+        setCategoryName(value);
         break;
       default:
         break;
     }
   };
 
-  const clearState = () => { // clear all the input fields
+  const clearState = () => {
+    // clear all the input fields
     setImageId("");
     setTitle("");
     setCaption("");
@@ -130,14 +139,11 @@ const Profile = () => {
     setDate("");
     setUserName("");
     setTags("");
-    setCategoryId("");
+    setCategoryName("");
   };
 
-  const removePostFromList = (postId: string) => { // remove post from list
-    setPostList((prevList) => prevList.filter((post) => post._id !== postId));
-  };
-
-  const theme = createTheme({ // for textfield rounded corners and shadow style
+  const theme = createTheme({
+    // for textfield rounded corners and shadow style
     components: {
       MuiTextField: {
         styleOverrides: {
@@ -152,6 +158,19 @@ const Profile = () => {
       },
     },
   });
+
+  function convertToBase64(e: any) {
+    console.log(e);
+    var reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => {
+      console.log(reader.result);
+      setImageId(reader.result);
+    };
+    reader.onerror = (error) => {
+      console.log("errar :", error);
+    };
+  }
 
   return (
     <>
@@ -204,7 +223,7 @@ const Profile = () => {
                         }}
                         id="large_size"
                         type="file"
-                        onChange={(e) => setImage(e.target.value)}
+                        onChange={convertToBase64}
                       />
 
                       <TextField
@@ -213,8 +232,8 @@ const Profile = () => {
                         variant="outlined"
                         name="title"
                         placeholder="Enter Article title"
-                        //   onChange={handleInputChange}
-                        //   value={title}
+                        onChange={handleInputChange}
+                        value={title}
                         fullWidth={true}
                         required
                       />
@@ -226,7 +245,7 @@ const Profile = () => {
                         name="caption"
                         placeholder="Enter Article Caption"
                         onChange={handleInputChange}
-                        // value={title}
+                        value={caption}
                         fullWidth={true}
                         required
                       />
@@ -237,8 +256,8 @@ const Profile = () => {
                         variant="outlined"
                         name="description"
                         placeholder="Enter Article Description"
-                        //   value={description}
-                        //   onChange={handleInputChange}
+                        value={description}
+                        onChange={handleInputChange}
                         fullWidth={true}
                         multiline
                         minRows={5}
@@ -251,8 +270,8 @@ const Profile = () => {
                         variant="outlined"
                         name="date"
                         placeholder="Enter Date"
-                        //   onChange={handleInputChange}
-                        //   value={date}
+                        onChange={handleInputChange}
+                        value={date}
                         fullWidth={true}
                       />
 
@@ -262,19 +281,31 @@ const Profile = () => {
                         variant="outlined"
                         placeholder="Enter User Name"
                         name="userName"
-                        //   onChange={handleInputChange}
-                        //   value={userName}
+                        onChange={handleInputChange}
+                        value={userName}
                         fullWidth={true}
+                      />
+
+                      <TextField
+                        label="Category"
+                        type="text"
+                        variant="outlined"
+                        name="categoryName"
+                        placeholder="Enter Category Name"
+                        onChange={handleInputChange}
+                        value={categoryName}
+                        fullWidth={true}
+                        required
                       />
 
                       <TextField
                         label="Tags (Comma separated tags)"
                         type="text"
                         variant="outlined"
-                        name="tagString"
-                        // value={tagString}
+                        name="tags"
+                        value={tags}
                         placeholder="Enter comma separated tags"
-                        // onChange={handleInputChange}
+                        onChange={handleInputChange}
                         fullWidth={true}
                         required
                       />
@@ -290,18 +321,20 @@ const Profile = () => {
 
           <Divider className="!my-5" />
 
-          {/* {postList.map((post) => (
-          <Post
-            key={post._id}
-            _id={post._id}
+          {postList.map((post) => (
+            <Post
+              key={post._id}
+            _id={post._id}  
+            imageId={post.imageId}
             title={post.title}
+            caption={post.caption}
             description={post.description}
+            date={post.date}
+            userName={post.userName}
             tags={post.tags}
-            hoursCount={post.hoursCount}
-            lecturerName={post.lecturerName}
-            removePostFromList={removePostFromList}
-          />
-        ))} */}
+            categoryId={post.categoryId}
+            />
+          ))}
         </div>
       </AdminLayout>
     </>
