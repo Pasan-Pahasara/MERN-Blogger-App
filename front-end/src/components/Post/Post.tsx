@@ -107,8 +107,7 @@ const Post: FC<PostProps> = (props) => {
         {props.caption}
       </h2>
       <p className="flex justify-center items-center font-opensans">
-        {" "}
-        {props.description}
++        {props.description}
       </p>
     </div>
   );
