@@ -5,7 +5,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { Divider, TextField, ThemeProvider, createTheme } from "@mui/material";
-import api from "../../axios";
+import axios from "../../axios";
 import AdminLayout from "../admin/AdminLayout";
 
 const Profile = () => {
@@ -30,7 +30,7 @@ const Profile = () => {
 
   const retrieveAllPosts = () => {
     // retrieve all posts
-    api
+    axios
       .get("post")
       .then((res) => {
         console.log(res);
@@ -40,6 +40,8 @@ const Profile = () => {
         console.log(error);
       });
   };
+
+  
 
   const handleClickCreateNewPost = () => {
     // handle click create new post
@@ -76,7 +78,7 @@ const Profile = () => {
       categoryName: categoryName,
     };
 
-    api
+    axios
       .post("post", newPost)
       .then((res) => {
         console.log(res);

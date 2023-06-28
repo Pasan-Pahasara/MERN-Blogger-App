@@ -8,7 +8,7 @@ export interface IPost extends Document { // IPost is the interface of the post
     date?: String;
     userName?: String;
     tags: String[];
-    categoryId: string;
+    categoryId: String;
 }
 
 const PostSchema = new Schema<IPost>( // PostSchema is the schema of the post

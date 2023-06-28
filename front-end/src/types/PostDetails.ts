@@ -1,13 +1,14 @@
 export type PostDetails = {
+  categoryName: any;
   _id: string;
   postList: PostDetails[];
   isClickedCreateNewPost: boolean;
-  imageId: String;
-  title: String;
-  caption: String;
-  description: String;
-  date?: String;
-  userName?: String;
-  tags: String[];
+  imageId: string;
+  title: string;
+  caption: string;
+  description: string;
+  date: string;
+  userName: string;
+  tags: string[];
   categoryId: string;
 };
