@@ -13,50 +13,12 @@ import {
   createTheme,
 } from "@mui/material";
 import { PostDetails } from "../../types/PostDetails";
-
-type PostProps = {
-  // post props
-  _id: string;
-  imageId: string;
-  title: string;
-  caption: string;
-  description: string;
-  date: string;
-  userName: string;
-  tags: string[];
-  categoryId: string;
-  removePostFromList?: (postId: string) => void;
-};
-
-type catergroy = {
-  _id: string;
-  categoryName: string;
-};
-
-type image = {
-  // image type
-  _id: string;
-  imageUrl: string;
-};
-
-const deletePost = (postId: string, props: PostProps) => {
-  // delete post
-  axios
-    .delete(`post/${postId}`)
-    .then((res) => {
-      console.log(res);
-      if (props.removePostFromList) {
-        props.removePostFromList(postId);
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
+import { PostProps } from "../../types/PostProps";
+import { catergroy } from "../../types/Catergroy";
+import { image } from "../../types/Image";
 
 const Post: FC<PostProps> = (props) => {
   // post component
-  const [postList, setPostList] = useState<PostDetails[]>([]);
   const [postArray, setPostArray] = useState<PostDetails[]>([]);
   const [imageId, setImageId] = useState<any>(null);
   const [title, setTitle] = useState<string>("");
@@ -193,7 +155,7 @@ const Post: FC<PostProps> = (props) => {
   const updatePost = (id: string) => {
     // update post
     let tagsArray = convertTagStringToArray(tags);
-
+  
     let updatePost = {
       // create new post object
       imageUrl: imageId,
@@ -205,34 +167,42 @@ const Post: FC<PostProps> = (props) => {
       tags: tagsArray,
       categoryName: categoryName,
     };
-
+  
     axios
-      .put("post/{id}", updatePost)
+      .put(`post/${id}`, updatePost)
       .then((res) => {
         console.log(res);
-        alert("Post Updated Successfully");
-        // setPostList((prevList) => [...prevList, res.data.responseData]);
-        // clearState();
+        const updatedPost = res.data.responseData;
+        setPostArray((prevPosts) => {
+          const updatedArray = prevPosts.map((post) =>
+            post._id === updatedPost._id ? updatedPost : post
+          );
+          return updatedArray;
+        });
+        clearState(); // Clear the input fields after updating the post
+        handleClose(); // Close the modal after updating the post
+        getAllPost(); // Get all posts again after updating
       })
       .catch((error) => {
         console.log(error);
       });
-
-    // let updateImage = {
-    //   imageId: imageId,
-    // };
-    // axios
-    //   .put(`post/image/${id}`, updateImage)
-    //   .then((res) => {
-    //     console.log(res);
-    //     let post: PostDetails[] = [...postList, res.data.responseData];
-    //     setPostList(post);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   };
-
+  
+  const deletePost = (postId: string, props: PostProps) => {
+    // delete post
+    axios
+      .delete(`post/${postId}`)
+      .then((res) => {
+        console.log(res);
+        if (props.removePostFromList) {
+          props.removePostFromList(postId);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  
   function convertToBase64(e: any) {
     // convert to base64
     console.log(e);
