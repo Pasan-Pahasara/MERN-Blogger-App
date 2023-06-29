@@ -90,14 +90,14 @@ const SuggestPosts = ({ className, header, tags }: CardProps) => {
         Tags
       </h2>
       <div className="flex flex-wrap gap-x-2 gap-y-2 mt-4">
-        {tags.map((item, index) => {
+        {allPosts.map((item, index) => {
           return (
             <Link
               key={index}
               to="/"
               className="inline-block rounded-md px-3 py-1.5 bg-purple-600 font-Ubuntu text-xs text-white md:text-sm"
             >
-              {item}
+              {item.tags.join(", ")}
             </Link>
           );
         })}
