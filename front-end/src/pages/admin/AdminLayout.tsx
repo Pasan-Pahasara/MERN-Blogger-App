@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { Outlet } from "react-router-dom";
 import UserHeader from "../../components/Header/UserHeader/UserHeader";
+import Header from "../../components/Header/Header";
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -8,7 +9,7 @@ interface AdminLayoutProps {
 const AdminLayout = ({ children }: AdminLayoutProps) => {
   return (
     <div>
-      <UserHeader />
+      <Header />
       {children}
     </div>
   );

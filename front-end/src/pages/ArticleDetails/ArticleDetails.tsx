@@ -60,11 +60,13 @@ const ArticleDetails = (): JSX.Element => {
   const [postList, setPostList] = useState<PostDetails[]>([]);
   const [post, setPost] = useState<PostDetails | null>(null); // Use PostDetails type for post state
   const [imageList, setImageList] = useState<image[]>([]); // imageList: image[]
+  const [allPosts, setAllPosts] = useState<PostDetails[]>([]); // Use PostDetails type for allPosts state
 
   useEffect(() => {
     // use effect
     retrieveAllPosts();
     retrieveImage();
+    AllPosts();
   }, []);
 
   const retrieveAllPosts = () => {
@@ -76,11 +78,23 @@ const ArticleDetails = (): JSX.Element => {
         const foundPost = res.data.responseData; // Find the post with the given postId);
         setPost(foundPost);
       })
-      .catch((error) => { 
+      .catch((error) => {
         console.log(error);
       });
   };
-  
+
+  const AllPosts = () => {
+    // retrieve all posts
+    axios
+      .get(`post`)
+      .then((res) => {
+        setAllPosts(res.data.responseData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const retrieveImage = () => {
     // retrieve image based on imageId
     axios
@@ -104,24 +118,24 @@ const ArticleDetails = (): JSX.Element => {
             {/* image start  */}
             <img
               className="rounded-xl w-full"
-              src={imageList.find((image) => image._id === post?.imageId)?.imageUrl}
+              src={
+                imageList.find((image) => image._id === post?.imageId)?.imageUrl
+              }
               alt="ui ux"
             />
             {/* image end  */}
             {/* start discription */}
             <Link
-              to={"/blog?category=selectedCategory"}
+              to={""}
               className="text-purple-600 text-sm font-Ubuntu inline-block mt-4 md:text-base"
             >
-              {post?.categoryName}
+              {post?.title}
             </Link>
             <h1 className="text-xl font-medium font-Ubuntu mt-4 text-dark-hard md:text-[26px]">
-              {post?.title}
+              {post?.caption}
             </h1>
             <div className="mt-4 text-dark-soft">
-              <p className="leading-7">
-               {post?.description}
-              </p>
+              <p className="leading-7">{post?.description}</p>
             </div>
             {/* end discription */}
             {/* start comments container  */}
@@ -130,15 +144,14 @@ const ArticleDetails = (): JSX.Element => {
           </article>
           <div>
             {/* start suggested posts */}
-            <SuggestPosts
-              header={"Latest Articles"}
-              posts={postsData}
-              tags={tagsData}
-              className="mt-8 lg:mt-0 lg-max-w-xs"
-            />
+              <SuggestPosts
+                header={"Latest Articles"}
+                tags={tagsData}
+                className="mt-8 lg:mt-0 lg-max-w-xs"
+              />
             {/* end suggested posts */}
             {/* start social share buttons */}
-            <div className="mt-7">
+            <div className="mt-7 flex gap-4">
               <h2 className="font-Ubuntu font-medium text-dark-hard mb-4 md:text-xl">
                 Share On:
               </h2>

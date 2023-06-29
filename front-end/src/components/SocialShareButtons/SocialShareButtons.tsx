@@ -11,7 +11,7 @@ interface SocialShareButtonsProps{
 
 const SocialShareButtons = ({url, title }:SocialShareButtonsProps) => {
   return (
-    <div className="w-full flex justify-between">
+    <div className="flex gap-4">
       <a
         target="_blank"
         rel="noreferrer"
