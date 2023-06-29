@@ -11,7 +11,11 @@ interface NavItem {
 
 const NavItemsInfo = [
   { name: "Home", type: "link" },
-  { name: "Articles", type: "link" },
+  {
+    name: "Articles",
+    type: "Enter",
+    items: [{ title: "Articles", link: "/article" }],
+  },
   {
     name: "Pages",
     type: "dropdown",

@@ -6,6 +6,12 @@ import { PostDetails } from "../../types/PostDetails";
 
 const Articles = () => {
   const [postList, setPostList] = useState<PostDetails[]>([]);
+  const [showAllPosts, setShowAllPosts] = useState(false);
+  const visiblePosts = showAllPosts ? postList : postList.slice(0, 3);
+
+  const handleShowAllPosts = () => {
+    setShowAllPosts(true);
+  };
 
   useEffect(() => {
     // use effect
@@ -28,7 +34,7 @@ const Articles = () => {
   return (
     <section className="flex flex-col container mx-auto px-5 py-10">
       <div className="flex flex-wrap md:gap-x-5 gap-y-5 pb-10">
-        {postList.map((post) => (
+        {visiblePosts.map((post) => (
           <Card
             key={post._id}
             _id={post._id}
@@ -45,10 +51,12 @@ const Articles = () => {
         ))}
         ;
       </div>
-      <button className="mx-auto flex items-center gap-x-2 font-bold text-purple-600 border-2 border-purple-600 px-6 py-3 rounded-lg">
+      {!showAllPosts && (
+      <button onClick={handleShowAllPosts} className="mx-auto flex items-center gap-x-2 font-bold text-purple-600 border-2 border-purple-600 px-6 py-3 rounded-lg">
         <span>More articles</span>
         <KeyboardArrowRightIcon className="w-3 h-3" />
       </button>
+      )}
     </section>
   );
 };
