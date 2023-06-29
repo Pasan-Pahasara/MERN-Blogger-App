@@ -26,8 +26,7 @@ const Card: FC<PostProps> = (props) => { // props: PostProps
   };
   return (
     <div
-      // className={`rounded-xl overflow-hidden shadow-2xl shadow-purple-500/20 ${props.className}`}
-      className={`rounded-xl overflow-hidden shadow-2xl shadow-purple-500/20`}
+      className={`rounded-xl overflow-hidden shadow-2xl shadow-purple-500/20 ${ props.className }`}
     >
       <img
         src={imageList.find((image) => image._id === props.imageId)?.imageUrl}

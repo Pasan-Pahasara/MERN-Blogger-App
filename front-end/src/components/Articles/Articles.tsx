@@ -40,11 +40,8 @@ const Articles = () => {
             userName={post.userName}
             tags={post.tags}
             categoryId={post.categoryId}
+            className="my-card w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]"
           />
-          // <Card className="my-card w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]" />
-          // <Card className="my-card w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]" />
-          // <Card className="my-card w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]" />
-          // <Card className="my-card w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]" />
         ))}
         ;
       </div>

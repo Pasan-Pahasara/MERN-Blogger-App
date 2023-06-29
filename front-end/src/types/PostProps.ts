@@ -10,4 +10,5 @@ export type PostProps = {
     tags: string[];
     categoryId: string;
     removePostFromList?: (postId: string) => void;
+    className?: string; // Add the className prop with an optional modifier (?)
   };
