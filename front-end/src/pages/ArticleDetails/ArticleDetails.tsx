@@ -8,6 +8,7 @@ import CommentsContainer from "../../components/Comments/CommentsContainer/Comme
 import SocialShareButtons from "../../components/SocialShareButtons/SocialShareButtons";
 import axios from "../../axios";
 import { PostDetails } from "../../types/PostDetails";
+import { image } from "../../types/Image";
 
 const breadCrumbsData = [
   { name: "Home", link: "/" },
@@ -58,15 +59,15 @@ const tagsData: string[] = [
 const ArticleDetails = (): JSX.Element => {
   const [postList, setPostList] = useState<PostDetails[]>([]);
   const [post, setPost] = useState<PostDetails | null>(null); // Use PostDetails type for post state
-  const { postId } = useParams(); // Fetch the postId from route parameters
-  const location = useLocation(); // Fetch the location object from useLocation hook
+  const [imageList, setImageList] = useState<image[]>([]); // imageList: image[]
 
   useEffect(() => {
     // use effect
     retrieveAllPosts();
-  }, [postId, location]);
+    retrieveImage();
+  }, []);
 
-  const retrieveAllPosts = (): void => {
+  const retrieveAllPosts = () => {
     // retrieve all posts
     axios
       .get(`post/${localStorage.getItem("postId")}`)
@@ -80,6 +81,19 @@ const ArticleDetails = (): JSX.Element => {
       });
   };
   
+  const retrieveImage = () => {
+    // retrieve image based on imageId
+    axios
+      .get(`image`)
+      .then((res) => {
+        console.log(res);
+        setImageList(res.data.responseData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div>
       <MainLayout>
@@ -90,7 +104,7 @@ const ArticleDetails = (): JSX.Element => {
             {/* image start  */}
             <img
               className="rounded-xl w-full"
-              src={images.Post1Image}
+              src={imageList.find((image) => image._id === post?.imageId)?.imageUrl}
               alt="ui ux"
             />
             {/* image end  */}
