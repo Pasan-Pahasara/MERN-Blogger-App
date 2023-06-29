@@ -1,27 +1,45 @@
-import React from "react";
+import React, { FC, useEffect, useState } from "react";
 import images from "../../constants/Images/images";
 import CheckIcon from "@mui/icons-material/Check";
+import { PostProps } from "../../types/PostProps";
+import { image } from "../../types/Image";
+import axios from "../../axios";
 
-interface CardProps {
-  className: string;
-}
+const Card: FC<PostProps> = (props) => { // props: PostProps
+  const [imageList, setImageList] = useState<image[]>([]); // imageList: image[]
 
-const Card = ({ className }: CardProps) => {
+  useEffect(() => { // useEffect
+    retrieveImage();
+  }, []);
+
+  const retrieveImage = () => {
+    // retrieve image based on imageId
+    axios
+      .get(`image`)
+      .then((res) => {
+        console.log(res);
+        setImageList(res.data.responseData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div
-      className={`rounded-xl overflow-hidden shadow-2xl shadow-purple-500/20 ${className}`}
+      // className={`rounded-xl overflow-hidden shadow-2xl shadow-purple-500/20 ${props.className}`}
+      className={`rounded-xl overflow-hidden shadow-2xl shadow-purple-500/20`}
     >
       <img
-        src={images.Post1Image}
+        src={imageList.find((image) => image._id === props.imageId)?.imageUrl}
         alt="title"
         className="w-full object-cover object-center h-auto md:h-52 lg:h-48 xl:h-60"
       />
       <div className="p-5">
         <h2 className="font-Ubuntu font-bold text-xl text-dark-soft md:text-2xl lg:[28px]">
-          Future of Work
+          {props.title}
         </h2>
         <p className="text-dark-light mt-3 text-sm md:text-lg">
-          Majority of people will work in jobs that don't exit today.
+          {props.caption}
         </p>
         <div className="flex justify-between flex-nowrap items-center mt-6">
           <div className="flex items-center gap-x-2 md:gap-x-2.5">
@@ -32,7 +50,7 @@ const Card = ({ className }: CardProps) => {
             />
             <div className="flex flex-col">
               <h4 className="font-bold italic text-dark-soft text-sm md:text-base">
-                Bruce Watson
+                {props.userName}
               </h4>
               <div className="flex items-center gap-x-2">
                 <span className="bg-[#36B37E] w-fit bg-opacity-20 p-1.5 rounded-full">
@@ -45,7 +63,7 @@ const Card = ({ className }: CardProps) => {
             </div>
           </div>
           <span className="font-bold text-dark-light italic text-sm md:text-base">
-            2 June
+            {props.date}
           </span>
         </div>
       </div>
