@@ -1,11 +1,13 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import MainLayout from "../../components/MainLayout/MainLayout";
 import BreadCrumbs from "../../components/BreadCrumbs/BreadCrumbs";
 import images from "../../constants/Images/images";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import SuggestPosts from "./container/SuggestedPosts/SuggestPosts";
 import CommentsContainer from "../../components/Comments/CommentsContainer/CommentsContainer";
 import SocialShareButtons from "../../components/SocialShareButtons/SocialShareButtons";
+import axios from "../../axios";
+import { PostDetails } from "../../types/PostDetails";
 
 const breadCrumbsData = [
   { name: "Home", link: "/" },
@@ -43,7 +45,7 @@ const postsData = [
 // end added tempory data to the posts
 
 // start tempory tag data
-const tagsData = [
+const tagsData: string[] = [
   "UI UX",
   "Theams",
   "React",
@@ -53,7 +55,31 @@ const tagsData = [
 ];
 // end tempory tag data
 
-const ArticleDetails = () => {
+const ArticleDetails = (): JSX.Element => {
+  const [postList, setPostList] = useState<PostDetails[]>([]);
+  const [post, setPost] = useState<PostDetails | null>(null); // Use PostDetails type for post state
+  const { postId } = useParams(); // Fetch the postId from route parameters
+  const location = useLocation(); // Fetch the location object from useLocation hook
+
+  useEffect(() => {
+    // use effect
+    retrieveAllPosts();
+  }, [postId, location]);
+
+  const retrieveAllPosts = (): void => {
+    // retrieve all posts
+    axios
+      .get(`post/${localStorage.getItem("postId")}`)
+      .then((res) => {
+        setPostList(res.data.responseData);
+        const foundPost = res.data.responseData; // Find the post with the given postId);
+        setPost(foundPost);
+      })
+      .catch((error) => { 
+        console.log(error);
+      });
+  };
+  
   return (
     <div>
       <MainLayout>
@@ -73,17 +99,14 @@ const ArticleDetails = () => {
               to={"/blog?category=selectedCategory"}
               className="text-purple-600 text-sm font-Ubuntu inline-block mt-4 md:text-base"
             >
-              EDUCATION
+              {post?.categoryName}
             </Link>
             <h1 className="text-xl font-medium font-Ubuntu mt-4 text-dark-hard md:text-[26px]">
-              Help ui ux engineer get better education
+              {post?.title}
             </h1>
             <div className="mt-4 text-dark-soft">
               <p className="leading-7">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Reprehenderit doloremque totam voluptas possimus recusandae?
-                Quia, similique! Fuga, laboriosam! Iure odit hic in dolore animi
-                repellat praesentium quod vero cupiditate adipisci?
+               {post?.description}
               </p>
             </div>
             {/* end discription */}

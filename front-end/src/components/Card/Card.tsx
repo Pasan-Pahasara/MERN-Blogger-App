@@ -28,6 +28,7 @@ const Card: FC<PostProps> = (props) => { // props: PostProps
   };
 
   const handleCardClick = (postId: string) => {
+    localStorage.setItem("postId", postId); // Store postId in localStorage
     navigate(`/blog/${postId}`); // Navigate to post details page
   };
 

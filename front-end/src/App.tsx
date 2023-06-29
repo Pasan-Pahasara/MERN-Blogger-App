@@ -9,6 +9,7 @@ import Contact from "./pages/Contact/Contact";
 import About from "./pages/About/About";
 import Profile from "./pages/Profile/Profile";
 import Article from "./pages/Atricle/Article";
+import UserHeader from "./components/Header/UserHeader/UserHeader";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/about" element={<About />}></Route>
         <Route path="/admin" element={<Profile />}></Route>
         <Route path="/article" element={<Article />}></Route>
+        <Route path="/article/:id" element={<ArticleDetails />}></Route>
       </Routes>
       {/* end routes  */}
     </div>
