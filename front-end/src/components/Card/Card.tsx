@@ -4,9 +4,11 @@ import CheckIcon from "@mui/icons-material/Check";
 import { PostProps } from "../../types/PostProps";
 import { image } from "../../types/Image";
 import axios from "../../axios";
+import { useNavigate } from "react-router-dom";
 
 const Card: FC<PostProps> = (props) => { // props: PostProps
   const [imageList, setImageList] = useState<image[]>([]); // imageList: image[]
+  const navigate = useNavigate(); // Add useNavigate hook
 
   useEffect(() => { // useEffect
     retrieveImage();
@@ -24,9 +26,15 @@ const Card: FC<PostProps> = (props) => { // props: PostProps
         console.log(error);
       });
   };
+
+  const handleCardClick = (postId: string) => {
+    navigate(`/blog/${postId}`); // Navigate to post details page
+  };
+
   return (
     <div
       className={`rounded-xl overflow-hidden shadow-2xl shadow-purple-500/20 ${ props.className }`}
+      onClick={() => handleCardClick(props._id)}
     >
       <img
         src={imageList.find((image) => image._id === props.imageId)?.imageUrl}
