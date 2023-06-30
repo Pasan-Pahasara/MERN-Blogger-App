@@ -28,7 +28,6 @@ function App() {
         <Route path="/about" element={<About />}></Route>
         <Route path="/admin" element={<Profile />}></Route>
         <Route path="/article" element={<Article />}></Route>
-        {/* <Route path="/article/:id" element={<ArticleDetails />}></Route> */}
         <Route path="/adminHome" element={<AdminHome />}></Route>
         <Route path="/adminAbout" element={<AdminAbout />}></Route>
         <Route path="/adminContact" element={<AdminContact />}></Route>
