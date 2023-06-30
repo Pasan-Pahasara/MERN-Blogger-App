@@ -52,10 +52,13 @@ const Articles = () => {
         ;
       </div>
       {!showAllPosts && (
-      <button onClick={handleShowAllPosts} className="mx-auto flex items-center gap-x-2 font-bold text-purple-600 border-2 border-purple-600 px-6 py-3 rounded-lg">
-        <span>More articles</span>
-        <KeyboardArrowRightIcon className="w-3 h-3" />
-      </button>
+        <button
+          onClick={handleShowAllPosts}
+          className="mx-auto flex items-center gap-x-2 font-bold text-purple-600 border-2 border-purple-600 px-6 py-3 rounded-lg transition duration-300 ease-in-out hover:bg-gradient-to-r hover:from-purple-600 hover:to-purple-800 hover:border-purple-800 hover:text-white"
+        >
+          <span>More articles</span>
+          <KeyboardArrowRightIcon className="w-3 h-3" />
+        </button>
       )}
     </section>
   );
