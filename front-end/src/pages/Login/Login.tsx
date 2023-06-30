@@ -3,18 +3,11 @@ import MainLayout from "../../components/MainLayout";
 import { Link, useNavigate } from "react-router-dom";
 import { ChangeEvent, useState } from "react";
 import axios from "../../axios";
-
-type userProps = {
-  // user props
-  _id: string;
-  email: string,
-      password: string,
-};
+import Swal from "sweetalert2";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  // const [userId, setUserId] = useState("");
 
   const navigate = useNavigate();
 
@@ -32,9 +25,24 @@ const Login = () => {
       // setUserId(res.data.responseData.id); // Store the user ID in state
       localStorage.setItem("id", res.data.responseData.id); // Store userId in localStorage
       navigate(`/admin`); // Navigate to user details page
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Log in Successful..!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      // toast.success('Log in Successfully..!');
     })
     .catch((err) => {
       console.log(err);
+        Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Something Went Wrong..!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     });
   };
 
