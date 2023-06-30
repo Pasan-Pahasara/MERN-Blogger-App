@@ -34,7 +34,7 @@ const Card: FC<PostProps> = (props) => { // props: PostProps
 
   return (
     <div
-      className={`rounded-xl overflow-hidden shadow-2xl shadow-purple-500/20 ${ props.className }`}
+      className={`rounded-xl overflow-hidden shadow-2xl shadow-purple-500/20 transition-transform duration-300 hover:scale-105 ${ props.className }`}
       onClick={() => handleCardClick(props._id)}
     >
       <img
