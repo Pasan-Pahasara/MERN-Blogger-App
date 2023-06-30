@@ -10,12 +10,21 @@ interface NavItem {
 }
 
 const NavItemsInfo = [
-  { name: "Home", type: "link" },
+  {
+    name: "Home",
+    type: "dropdown",
+    items: [
+      {
+        title: "Home",
+        link: "/adminHome",
+      },
+    ],
+  },
   {
     name: "Articles",
-    type: "Enter",
+    type: "dropdown",
     items: [
-      { title: "Articles", link: "/article" },
+      { title: "Articles", link: "/adminArticle" },
       { title: "Manage Articles", link: "/admin" },
     ],
   },
@@ -23,8 +32,8 @@ const NavItemsInfo = [
     name: "Pages",
     type: "dropdown",
     items: [
-      { title: "About us", link: "/about" },
-      { title: "Contact us", link: "/contact" },
+      { title: "About us", link: "/adminAbout" },
+      { title: "Contact us", link: "/adminContact" },
     ],
   },
 ];
@@ -98,7 +107,7 @@ function UserHeader() {
   return (
     <section className="sticky top-0 left-0 right-0 z-50 bg-white">
       <header
-        className="container mt-4 mx-auto px-5 flex justify-center py-4 items-center"
+        className="container mt-4 mx-auto mb-14 px-5 flex justify-center py-4 items-center"
         style={{
           boxShadow:
             " rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset",

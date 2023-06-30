@@ -9,7 +9,7 @@ interface AdminLayoutProps {
 const AdminLayout = ({ children }: AdminLayoutProps) => {
   return (
     <div>
-      <Header />
+      <UserHeader />
       {children}
     </div>
   );

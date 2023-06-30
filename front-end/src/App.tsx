@@ -9,7 +9,10 @@ import Contact from "./pages/Contact/Contact";
 import About from "./pages/About/About";
 import Profile from "./pages/Profile/Profile";
 import Article from "./pages/Atricle/Article";
-import UserHeader from "./components/Header/UserHeader/UserHeader";
+import AdminHome from "./pages/admin/adminHome/AdminHome";
+import AdminContact from "./pages/admin/AdminContact/AdminContact";
+import AdminAbout from "./pages/admin/AdminAbout/AdminAbout";
+import AdminArticle from "./pages/admin/AdminAtricle/AdminArticle";
 
 function App() {
   return (
@@ -25,6 +28,10 @@ function App() {
         <Route path="/admin" element={<Profile />}></Route>
         <Route path="/article" element={<Article />}></Route>
         <Route path="/article/:id" element={<ArticleDetails />}></Route>
+        <Route path="/adminHome" element={<AdminHome />}></Route>
+        <Route path="/adminAbout" element={<AdminAbout />}></Route>
+        <Route path="/adminContact" element={<AdminContact />}></Route>
+        <Route path="/adminArticle" element={<AdminArticle />}></Route>
       </Routes>
       {/* end routes  */}
     </div>
