@@ -5,13 +5,16 @@ import { PostProps } from "../../types/PostProps";
 import { image } from "../../types/Image";
 import axios from "../../axios";
 import { useNavigate } from "react-router-dom";
+import { UserProps } from "../../types/User";
 
 const Card: FC<PostProps> = (props) => { // props: PostProps
   const [imageList, setImageList] = useState<image[]>([]); // imageList: image[]
   const navigate = useNavigate(); // Add useNavigate hook
+  const [userList, setUserList] = useState<UserProps[]>([]);
 
   useEffect(() => { // useEffect
     retrieveImage();
+    retrieveAllUsers();
   }, []);
 
   const retrieveImage = () => {
@@ -21,6 +24,19 @@ const Card: FC<PostProps> = (props) => { // props: PostProps
       .then((res) => {
         console.log(res);
         setImageList(res.data.responseData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const retrieveAllUsers = () => {
+    // retrieve all posts
+    axios
+      .get("user")
+      .then((res) => {
+        console.log(res);
+        setUserList(res.data.responseData);
       })
       .catch((error) => {
         console.log(error);
@@ -58,7 +74,7 @@ const Card: FC<PostProps> = (props) => { // props: PostProps
             />
             <div className="flex flex-col">
               <h4 className="font-bold italic text-dark-soft text-sm md:text-base">
-                {props.userName}
+                {userList.find((user) => user._id === props.userName)?.name}
               </h4>
               <div className="flex items-center gap-x-2">
                 <span className="bg-[#36B37E] w-fit bg-opacity-20 p-1.5 rounded-full">
