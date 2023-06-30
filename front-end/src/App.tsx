@@ -13,6 +13,7 @@ import AdminHome from "./pages/admin/adminHome/AdminHome";
 import AdminContact from "./pages/admin/AdminContact/AdminContact";
 import AdminAbout from "./pages/admin/AdminAbout/AdminAbout";
 import AdminArticle from "./pages/admin/AdminAtricle/AdminArticle";
+import AdminArticleDetails from "./pages/admin/AdminArticleDetails/AdminArticleDetails";
 
 function App() {
   return (
@@ -27,11 +28,12 @@ function App() {
         <Route path="/about" element={<About />}></Route>
         <Route path="/admin" element={<Profile />}></Route>
         <Route path="/article" element={<Article />}></Route>
-        <Route path="/article/:id" element={<ArticleDetails />}></Route>
+        {/* <Route path="/article/:id" element={<ArticleDetails />}></Route> */}
         <Route path="/adminHome" element={<AdminHome />}></Route>
         <Route path="/adminAbout" element={<AdminAbout />}></Route>
         <Route path="/adminContact" element={<AdminContact />}></Route>
         <Route path="/adminArticle" element={<AdminArticle />}></Route>
+        <Route path="/adminArticleDetails/:id" element={<AdminArticleDetails />}></Route>
       </Routes>
       {/* end routes  */}
     </div>
