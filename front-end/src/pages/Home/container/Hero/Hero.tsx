@@ -34,20 +34,21 @@ const Hero = () => {
           </span>
           <ul className="flex flex-wrap gap-x-2.5 gap-y-2.5 mt-3 lg:text-sm xl:text-base">
             <li className="rounded-lg bg-purple-600 bg-opacity-10 px-3 py-1.5 text-purple-600 font-semibold">
-              React Native
+              UI
             </li>
             <li className="rounded-lg bg-purple-600 bg-opacity-10 px-3 py-1.5 text-purple-600 font-semibold">
-              React
-            </li>
-            <li className="rounded-lg bg-purple-600 bg-opacity-10 px-3 py-1.5 text-purple-600 font-semibold">
-              UI UX
+              UX
             </li>
           </ul>
         </div>
       </div>
 
       <div className="hidden lg:block lg:1/2">
-        <img className="w-full" src={images.HeroImage} alt="users are reading articles" />
+        <img
+          className="w-full"
+          src={images.HeroImage}
+          alt="users are reading articles"
+        />
       </div>
     </section>
   );
