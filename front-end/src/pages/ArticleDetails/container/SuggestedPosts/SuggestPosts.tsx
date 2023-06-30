@@ -47,7 +47,7 @@ const SuggestPosts = ({ className, header, tags }: CardProps) => {
 
   return (
     <div
-      className={`w-full max-w-6xl shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px] rounded-lg p-4 ${className}`}
+      className={`w-full shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px] rounded-lg p-4 ${className}`}
     >
       <h2 className="font-Ubuntu font-medium text-dark-hard md:text-xl">
         {header}
@@ -62,7 +62,7 @@ const SuggestPosts = ({ className, header, tags }: CardProps) => {
             {/* end id */}
             {/* start image  */}
             <img
-              className="aspect-square object-cover rounded-lg w-1/5"
+              className="aspect-square object-cover rounded-lg w-1/3 transition-transform duration-300 hover:scale-105 shadow-2xl"
               src={
                 imageList.find((image) => image._id === post?.imageId)?.imageUrl
               }
@@ -94,8 +94,8 @@ const SuggestPosts = ({ className, header, tags }: CardProps) => {
           return (
             <Link
               key={index}
-              to="/"
-              className="inline-block rounded-md px-3 py-1.5 bg-purple-600 font-Ubuntu text-xs text-white md:text-sm"
+              to=""
+              className="inline-block rounded-md px-3 py-1.5 bg-purple-600 font-Ubuntu text-xs text-white md:text-sm transition-transform duration-300 hover:scale-105 shadow-2xl"
             >
               {item.tags.join(", ")}
             </Link>

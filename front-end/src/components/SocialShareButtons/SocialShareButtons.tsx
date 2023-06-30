@@ -17,28 +17,28 @@ const SocialShareButtons = ({url, title }:SocialShareButtonsProps) => {
         rel="noreferrer"
         href={`=${url}`}
       >
-        <FacebookIcon className="text-[#3b5998] w-12 h-auto" />
+        <FacebookIcon className="text-[#3b5998] w-12 h-auto transition-transform duration-300 hover:scale-105 shadow-2xl" />
       </a>
       <a
         target="_blank"
         rel="noreferrer"
         href={`=${url}`}
       >
-        <InstagramIcon className="text-[#E1306C] w-12 h-auto" />
+        <InstagramIcon className="text-[#E1306C] w-12 h-auto transition-transform duration-300 hover:scale-105 shadow-2xl" />
       </a>
       <a
         target="_blank"
         rel="noreferrer"
         href={`=${url}`}
       >
-        <GitHubIcon className="text-[#171515] w-12 h-auto" />
+        <GitHubIcon className="text-[#171515] w-12 h-auto transition-transform duration-300 hover:scale-105 shadow-2xl" />
       </a>
       <a
         target="_blank"
         rel="noreferrer"
         href={`=${url}`}
       >
-        <TwitterIcon className="text-[#1DA1F2] w-12 h-auto" />
+        <TwitterIcon className="text-[#1DA1F2] w-12 h-auto transition-transform duration-300 hover:scale-105 shadow-2xl" />
       </a>
     </div>
   )

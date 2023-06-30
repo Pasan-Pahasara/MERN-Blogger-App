@@ -117,7 +117,7 @@ const ArticleDetails = (): JSX.Element => {
             <BreadCrumbs data={breadCrumbsData} />
             {/* image start  */}
             <img
-              className="rounded-xl w-full"
+              className="rounded-xl w-full transition-transform duration-300 hover:scale-105 shadow-2xl"
               src={
                 imageList.find((image) => image._id === post?.imageId)?.imageUrl
               }
