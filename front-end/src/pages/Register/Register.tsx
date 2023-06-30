@@ -3,6 +3,7 @@ import MainLayout from "../../components/MainLayout";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "../../axios";
+import Swal from "sweetalert2";
 
 type UserDetails = {
   _id: string;
@@ -11,7 +12,6 @@ type UserDetails = {
   password: string;
 };
 
-
 function Register() {
   const [userList, setUserList] = useState<UserDetails[]>([]);
   const [name, setName] = useState<string>("");
@@ -19,8 +19,7 @@ function Register() {
   const [password, setPassword] = useState<string>("");
   const [verifyPassword, setVerifyPassword] = useState<string>("");
 
-
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -45,24 +44,40 @@ function Register() {
       password: password,
     };
 
-    if(verifyPassword==password){
-    axios
-      .post("user", newUser)
-      .then((res) => {
-        console.log(res);
-        let user: UserDetails[] = [...userList];
-        user.push(res.data.responseData);
-        console.log(res.data.responseData);
-        setUserList(user);
-        navigate("/login", { replace: false });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    }else{
-      alert("Password and Confirm Password should be same");
+    if (verifyPassword === password) {
+      axios
+        .post("user", newUser)
+        .then((res) => {
+          console.log(res);
+          let user: UserDetails[] = [...userList];
+          user.push(res.data.responseData);
+          console.log(res.data.responseData);
+          setUserList(user);
+          navigate("/login", { replace: false });
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Registered Successful..!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "Something Went Wrong..!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        });
+    } else {
+      alert("Password and Confirm Password should be the same");
     }
   };
+
+  const isRegisterButtonDisabled = password !== verifyPassword;
 
   return (
     <MainLayout>
@@ -85,7 +100,9 @@ function Register() {
                 name="name"
                 placeholder="Enter name"
                 onChange={handleInputChange}
-                className={`placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border`}
+                pattern="[A-Za-z\s]+"
+                required
+                className="placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border"
               />
             </div>
             <div className="flex flex-col mb-6 w-full">
@@ -101,7 +118,9 @@ function Register() {
                 name="email"
                 placeholder="Enter email"
                 onChange={handleInputChange}
-                className={`placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border`}
+                pattern="^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$"
+                required
+                className="placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border"
               />
             </div>
             <div className="flex flex-col mb-6 w-full">
@@ -117,7 +136,9 @@ function Register() {
                 name="password"
                 placeholder="Enter password"
                 onChange={handleInputChange}
-                className={`placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border`}
+                pattern=".{6,}"
+                required
+                className="placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border"
               />
             </div>
             <div className="flex flex-col mb-6 w-full">
@@ -133,12 +154,14 @@ function Register() {
                 name="verifyPassword"
                 placeholder="Enter confirm password"
                 onChange={handleInputChange}
-                className={`placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border`}
+                pattern=".{6,}"
+                required
+                className="placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border"
               />
             </div>
             <button
               type="submit"
-              disabled={false}
+              disabled={isRegisterButtonDisabled}
               className="bg-purple-600 text-white font-bold text-lg py-4 px-8 w-full rounded-lg mb-6 disabled:opacity-70 disabled:cursor-not-allowed"
             >
               Register
