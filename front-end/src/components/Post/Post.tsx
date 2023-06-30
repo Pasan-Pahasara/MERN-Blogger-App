@@ -17,6 +17,7 @@ import { PostProps } from "../../types/PostProps";
 import { catergroy } from "../../types/Catergroy";
 import { image } from "../../types/Image";
 import { UserProps } from "../../types/User";
+import Swal from "sweetalert2";
 
 const Post: FC<PostProps> = (props) => {
   // post component
@@ -193,9 +194,23 @@ const Post: FC<PostProps> = (props) => {
         clearState(); // Clear the input fields after updating the post
         handleClose(); // Close the modal after updating the post
         getAllPost(); // Get all posts again after updating
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Log in Successful..!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       })
       .catch((error) => {
         console.log(error);
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: "Something Went Wrong..!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       });
   };
   
@@ -205,12 +220,37 @@ const Post: FC<PostProps> = (props) => {
       .delete(`post/${postId}`)
       .then((res) => {
         console.log(res);
-        if (props.removePostFromList) {
-          props.removePostFromList(postId);
-        }
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            if (props.removePostFromList) {
+              props.removePostFromList(postId);
+            }
+            getAllPost();
+            Swal.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            )
+          }
+        })
       })
       .catch((error) => {
         console.log(error);
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: "Something Went Wrong..!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       });
   };
   
