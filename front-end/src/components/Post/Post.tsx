@@ -197,7 +197,7 @@ const Post: FC<PostProps> = (props) => {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Log in Successful..!",
+          title: "Updated Successful..!",
           showConfirmButton: false,
           timer: 1500,
         });
