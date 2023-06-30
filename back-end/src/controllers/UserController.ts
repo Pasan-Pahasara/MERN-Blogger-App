@@ -140,7 +140,9 @@ export default class UserController {
           // check whether the password is correct or not
           return res.status(200).json({
             message: "Login Successfull..!",
-            responseData: { name: user.name, email },
+            // responseData: { name: user.name, email },
+            responseData: { id: user._id },
+
           });
         } else {
           return res.status(500).json({

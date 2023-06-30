@@ -4,9 +4,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { ChangeEvent, useState } from "react";
 import axios from "../../axios";
 
+type userProps = {
+  // user props
+  _id: string;
+  email: string,
+      password: string,
+};
+
 const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  // const [userId, setUserId] = useState("");
+
   const navigate = useNavigate();
 
   const userLogin = (event: React.FormEvent<HTMLFormElement>) => {
@@ -18,13 +27,15 @@ const Login = () => {
     };
 
     axios
-      .post("user/sign-in", loginDetail)
-      .then((res) => {
-        navigate("/admin");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    .post("user/sign-in", loginDetail)
+    .then((res) => {
+      // setUserId(res.data.responseData.id); // Store the user ID in state
+      localStorage.setItem("id", res.data.responseData.id); // Store userId in localStorage
+      navigate(`/admin`); // Navigate to user details page
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {

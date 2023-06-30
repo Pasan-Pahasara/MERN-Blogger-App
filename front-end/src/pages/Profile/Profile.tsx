@@ -17,10 +17,10 @@ const Profile = () => {
   const [caption, setCaption] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [date, setDate] = useState<string>("");
-  const [userName, setUserName] = useState<string>("");
   const [tags, setTags] = useState<string>("");
   const [categoryName, setCategoryName] = useState<string>("");
-
+  const id = localStorage.getItem("id");
+  
   useEffect(() => {
     // use effect
     retrieveAllPosts();
@@ -41,7 +41,9 @@ const Profile = () => {
       });
   };
 
-  
+  const filteredData = postList.filter((post) => post.userName === id);
+
+  console.log(filteredData);
 
   const handleClickCreateNewPost = () => {
     // handle click create new post
@@ -59,7 +61,7 @@ const Profile = () => {
       caption,
       description,
       date,
-      userName,
+      id,
       tags,
       categoryName,
     });
@@ -73,7 +75,7 @@ const Profile = () => {
       caption: caption,
       description: description,
       date: date,
-      userName: userName,
+      userName: id,
       tags: tagsArray,
       categoryName: categoryName,
     };
@@ -118,9 +120,6 @@ const Profile = () => {
       case "date":
         setDate(value);
         break;
-      case "userName":
-        setUserName(value);
-        break;
       case "tags":
         setTags(value);
         break;
@@ -139,7 +138,6 @@ const Profile = () => {
     setCaption("");
     setDescription("");
     setDate("");
-    setUserName("");
     setTags("");
     setCategoryName("");
   };
@@ -278,17 +276,6 @@ const Profile = () => {
                       />
 
                       <TextField
-                        label="User Name"
-                        type="text"
-                        variant="outlined"
-                        placeholder="Enter User Name"
-                        name="userName"
-                        onChange={handleInputChange}
-                        value={userName}
-                        fullWidth={true}
-                      />
-
-                      <TextField
                         label="Category"
                         type="text"
                         variant="outlined"
@@ -323,7 +310,7 @@ const Profile = () => {
 
           <Divider className="!my-5" />
 
-          {postList.map((post) => (
+          {filteredData.map((post) => (
             <Post
               key={post._id}
             _id={post._id}  

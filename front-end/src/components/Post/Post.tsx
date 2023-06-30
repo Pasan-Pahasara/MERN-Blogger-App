@@ -16,6 +16,7 @@ import { PostDetails } from "../../types/PostDetails";
 import { PostProps } from "../../types/PostProps";
 import { catergroy } from "../../types/Catergroy";
 import { image } from "../../types/Image";
+import { UserProps } from "../../types/User";
 
 const Post: FC<PostProps> = (props) => {
   // post component
@@ -25,11 +26,12 @@ const Post: FC<PostProps> = (props) => {
   const [caption, setCaption] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [date, setDate] = useState<string>("");
-  const [userName, setUserName] = useState<string>("");
   const [tags, setTags] = useState<string>("");
   const [categoryName, setCategoryName] = useState<string>("");
   const [categoryList, setCategoryList] = useState<catergroy[]>([]);
   const [imageList, setImageList] = useState<image[]>([]);
+  const [userList, setUserList] = useState<UserProps[]>([]);
+
 
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
@@ -38,6 +40,7 @@ const Post: FC<PostProps> = (props) => {
     getAllPost();
     retrieveCategoryName();
     retrieveImage();
+    retrieveAllUsers();
   }, []);
 
   const getAllPost = () => {
@@ -78,6 +81,19 @@ const Post: FC<PostProps> = (props) => {
       });
   };
 
+  const retrieveAllUsers = () => {
+    // retrieve all posts
+    axios
+      .get("user")
+      .then((res) => {
+        console.log(res);
+        setUserList(res.data.responseData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const handlUpdateSelectedRows = (id: string) => {
     // handle update selected rows
     setOpen(true);
@@ -89,7 +105,6 @@ const Post: FC<PostProps> = (props) => {
       setCaption(post.caption);
       setDescription(post.description);
       setDate(post.date);
-      setUserName(post.userName);
       setTags(post.tags.join(", "));
       const filteredData = categoryList.filter(
         (catagroy) => catagroy._id === post.categoryId
@@ -105,7 +120,6 @@ const Post: FC<PostProps> = (props) => {
     setCaption("");
     setDescription("");
     setDate("");
-    setUserName("");
     setTags("");
     setCategoryName("");
   };
@@ -138,9 +152,6 @@ const Post: FC<PostProps> = (props) => {
       case "date":
         setDate(value);
         break;
-      case "userName":
-        setUserName(value);
-        break;
       case "tags":
         setTags(value);
         break;
@@ -163,7 +174,7 @@ const Post: FC<PostProps> = (props) => {
       caption: caption,
       description: description,
       date: date,
-      userName: userName,
+      userName: localStorage.getItem("id"),
       tags: tagsArray,
       categoryName: categoryName,
     };
@@ -248,7 +259,11 @@ const Post: FC<PostProps> = (props) => {
             )}
             {props.userName && (
               <p>
-                <strong>User Name</strong> : {props.userName}
+                <strong>User Name</strong> : 
+                {/* {props.userName} */}
+                {
+                  userList.find((user) => user._id === props.userName)?.name
+                }
               </p>
             )}
             {props.categoryId && (
@@ -372,18 +387,6 @@ const Post: FC<PostProps> = (props) => {
                   value={date}
                   onChange={handleInputChange}
                   placeholder="Enter Date"
-                  fullWidth
-                  required
-                />
-
-                <TextField
-                  label="User Name"
-                  type="text"
-                  variant="outlined"
-                  value={userName}
-                  onChange={handleInputChange}
-                  placeholder="Enter User Name"
-                  name="userName"
                   fullWidth
                   required
                 />
