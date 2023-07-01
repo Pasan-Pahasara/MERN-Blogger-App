@@ -59,7 +59,7 @@ const CommentsContainer = ({
       _id: Math.random().toString(),
       user: {
         _id: "a",
-        name: "Oliver Benjamin",
+        name: "Pasan Pahasara",
       },
       desc: value,
       post: "1",
